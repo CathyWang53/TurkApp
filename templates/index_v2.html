@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>scenariol 1</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='mystyles.css') }}">
+<!--        Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--            intro.js-->
+        <link rel="stylesheet" href="/static/intro_js/node_modules/intro.js/introjs.css"/>
+
+    </head>
+    
+    <body>
+        <div class="container">
+
+            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+
+            <div class="app">
+                <h1> Scenario: {{htmlint}} / 10 </h1>
+                <h1> Note: Please speak naturally. </h1>
+                <div class="row" id="instruction1">
+                   <h2>You want movies like these:</h2>
+                </div>
+                <div class="row" id="movie-row-1">
+                   <div class="col-2" title="movie-row-1">
+                       <img id="poster1" src={{Poster1}}  alt={{"poster of" + Name1}} class="img-thumbnail" />
+                       <h4 id="name1"> {{Name1}} </h4>
+                    </div>
+                   <div class="col-2" title="movie-row-1">
+                       <img id="poster2" src={{Poster2}}  alt={{"poster of" + Name2}} class="img-thumbnail"/>
+                       <h4 id="name2"> {{Name2}} </h4>
+                   </div>
+                   <div class="col-2" title="movie-row-1">
+                       <img id="poster3" src={{Poster3}}  alt={{"poster of" + Name3}}  class="img-thumbnail"/>
+                       <h4 id="name3"> {{Name3}} </h4>
+                   </div>
+                   <div class="col-2" title="movie-row-1">
+                       <img id="poster4" src={{Poster3}}  alt={{"poster of" + Name4}} class="img-thumbnail"/>
+                       <h4 id="name4"> {{Name4}} </h4>
+                   </div>
+<!--                   </div>-->
+                   <div class="col-4" >
+                       <h5 class="text-center"> What would you say to your TV? </h5>
+                       <button  id="speak" title="speak">Speak</button>
+                   </div>
+                </div>
+                <div class="row">
+                    <h2>Rather than these:</h2>
+                </div>
+                <div class="row">
+                    <div class="col-2" >
+                        <img id="poster5" src={{Poster5}}  alt={{"poster of" + Name5}} class="img-thumbnail" />
+                        <h4 id="name5"> {{Name5}} </h4>
+                    </div>
+                    <div class="col-2" >
+                        <img id="poster6" src={{Poster6}}  alt={{"poster of" + Name6}}  class="img-thumbnail"/>
+                        <h4 id="name6"> {{Name6}} </h4>
+                    </div>
+                    <div class="col-2" >
+                        <img id="poster7" src={{Poster7}}  alt={{"poster of" + Name7}}  class="img-thumbnail"/>
+                        <h4 id="name7"> {{Name7}} </h4>
+                    </div>
+                    <div class="col-2" >
+                        <img id="poster8" src={{Poster8}}  alt={{"poster of" + Name8}}  class="img-thumbnail"/>
+                        <h4 id="name8"> {{Name8}} </h4>
+                    </div>
+                    <div class="col-4" >
+                        <div class="input-single">
+                            <textarea id="note-textarea" placeholder="What we heard..." rows="10"></textarea>
+                        </div>
+                        <p id="recording-instructions">  </p>
+                    </div>
+                </div>
+                
+<!--                <div class="row">-->
+
+
+                
+ 
+                <button id="help-btn" title="Help">Help</button>
+                <button id="save-note-sbtn" title="Save Note">Go next</button>
+                
+                <a href="/{{htmlint+1}}/{{SkipTime}}" id="go-next-btn"> go next2 </a>
+                <a href="/{{htmlint}}/{{SkipTime+1}}" id="skip-btn"> skip </a>
+                <p id="skip-inst"> SkipTime: {{SkipTime}} / 10 </p>
+
+                <p></p>
+                    
+                <iframe id="detail" src={{Detail1}} width=300 height=300></iframe>
+                <!--for test-->
+                <h3>My Answers</h3>
+                <ul id="notes">
+                    <li>
+                        <p class="no-notes">You don't have any answers.</p>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{{url_for('static',filename='js/script_v2.js')}}"></script>
+        
+<!--        Bootstrap-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+<!--        intro.js-->
+        <script type="text/javascript" src="/static/intro_js/node_modules/intro.js/intro.js"></script>
+<!--        <script type="text/javascript">introJs().start();</script>-->
+
+<!--        show detial info for each movie and help button-->
+        <script>
+            $('#poster1').mouseover(function(){
+                            $('#detail').attr({"src":"{{Detail1}}"});
+                            $('#detail').show();
+                            });
+            $('#poster1').mouseout(function(){
+                            $('#detail').hide();
+                            });
+            $('#poster2').mouseover(function(){
+                            $('#detail').attr({"src":"{{Detail2}}"});
+                            $('#detail').show();
+                            });
+            $('#poster2').mouseout(function(){
+                            $('#detail').hide();
+                            });
+            $('#help-btn').mouseover(function(){
+                                     $('#detail').attr({"src":"/static/texts/help.txt"});
+                            $('#detail').show();
+                            });
+            $('#help-btn').mouseout(function(){
+                            $('#detail').hide();
+                            });
+        if ({{SkipTime}}>=2) {
+                            $('#skip-btn').hide();
+                            $('#skip-inst').text("You have skipped for 10 times. So now you cannot skip again.")
+                            }
+                            else{
+                                $('#skip-btn').show();
+                                $('#skip-inst').text("SkipTime: {{SkipTime}} / 10")
+                            }
+        
+        </script>
+        
+
+        
+<!--        tutorial-->
+         <script>
+             $(function(){
+               var introguide = introJs();
+               
+               introguide.setOptions({
+                  steps: [
+                    {
+                          element: '#instruction1',
+                      intro: 'Find the similarity of the movies in the first line by comparing them with the movies in the second line. Imagine you want movies like the ones in the first line.',
+                      position: 'bottom'
+                    },
+                    {
+                      element: '#poster4',
+                        intro: 'Move your cursor onto the movie poster, more information about this movie will show up.',
+                        position: 'right'
+                    },
+                    {
+                       element: '#speak',
+                        intro: 'After you have got your answer, click speak button to speak as you are talking to your TV. It is good to speak natrualy.',
+                        position: 'left'
+                    },
+                    {
+                        element: '#skip-btn',
+                        intro: 'If you cannot find the answer, you can skip this scenario. Note that the maximum skipping time is 10, and you can get paid only if you answer 10 qustions.',
+                        position: 'right'
+                    },
+                    {
+                        element: '#help-btn',
+                        intro: 'In the following pages, if you need instructions again, click this button.',
+                        position: 'right'
+                    },
+                    
+                    ]
+                });
+               
+               if ({{SkipTime}}==0 & {{htmlint}}==0) introguide.start();
+               });
+        </script>
+
+    </body>
+</html>

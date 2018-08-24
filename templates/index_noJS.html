@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>scenariol 1</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">-->
+<!--        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">-->
+
+    </head>
+    <body>
+        <div class="container">
+
+            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+
+            <div class="app">
+                <h1>What you want:</h1>
+<!--                <h2>Genre: Comedy</h2>-->
+                {% if Prefix != None %} <h2>{{Prefix}}</h2>
+                {% endif %}
+                {% if Genre != None %} <h2>Genre: {{Genre}}</h2>
+                {% endif %}
+                {% if Actor != None %} <h2>Actor: {{Actor}}</h2>
+                {% endif %}
+                {% if Director != None %} <h2>Director: {{Director}}</h2>
+                {% endif %}
+                {% if Region != None %} <h2>Region: {{Region}}</h2>
+                {% endif %}
+                {% if Language != None %} <h2>Language: {{Language}}</h2>
+                {% endif %}
+                {% if Postfix != None %} <h2>Movies {{Postfix}}</h2>
+                {% endif %}
+                {% if Date != None %} <h2>Date: {{Date}}</h2>
+                {% endif %}
+                {% if Similar != None %} <h2>Movies like {{Similar}}</h2>
+                {% endif %}
+                
+                
+                <!--HELP-->
+                <div class="help">
+                    {% if Similar != None %}
+                    <p>Hint: {{Similar}} is the name of a movie.</p> {% endif %}
+                    <p style="display:inline"> Imagine you want a</p>
+                    {% if Prefix != None %}
+                    <p style="display:inline"> {{Prefix}}</p>
+                    {% endif %}
+                    {% if Genre != None %}
+                    <p style="display:inline"> {{Genre}}</p>
+                    {% endif %}
+                    <p style="display:inline"> movie</p>
+                    {% if Similar != None %}
+                    <p style="display:inline"> similar to {{Similar}}</p> {% endif %}
+                    {% if Actor != None %}
+                    <p style="display:inline"> starred by {{Actor}}</p> {% endif %}
+                    {% if Director != None %}
+                    <p style="display:inline"> directed by {{Director}}</p> {% endif %}
+                    {% if Region != None %}
+                    <p style="display:inline"> released in {{Region}}</p> {% endif %}
+                    {% if Date != None %}
+                    <p style="display:inline"> released in {{Date}}</p> {% endif %}
+                    {% if Postfix != None %}
+                    <p style="display:inline"> {{Postfix}} </p>
+                    {% endif %}
+                    {% if Language != None %}
+                    <p style="display:inline">, the language of which is {{Language}},</p> {% endif %}
+                    <p style="display:inline"> now. What would you say to your TV? </p>
+                </div>
+                
+<!--                <p id="help" class="page-description">Imagine you want a {{Genre}} now. What would you say to your TV?</p>-->
+
+                {% if htmlint == 0 %}
+                <p id="morehelp"> No idea about what to say? We prepare you with some examples. </p>
+                <button id="example" title="example">Show example</button>
+                
+                <p id="moreExample"> You can talk to me like these: <br />I'd like to watch a {{Genre}}.<br /> Show me a {{Genre}}.<br />It is good to follow your own habit.</p>
+                {% endif %}
+                
+                <button id="speak" title="speak">Speak</button>
+                <div class="input-single">
+                    <textarea id="note-textarea" placeholder="Press the Speak button to speak, acting as you are talking to your TV. Your words will be shown here" rows="10"></textarea>
+                </div>
+                
+<!--                <button id="start-record-btn" title="Start Recording">Start speak</button>-->
+<!--                <button id="pause-record-btn" title="Pause Recording">Stop</button>-->
+                <button id="help-btn" title="Help">Help</button>
+                <button id="save-note-btn" title="Save Note">Go next</button>
+                
+                <a href="/{{htmlint+1}}" id="go-next-btn"> go next2 </a>
+                
+                <p id="recording-instructions">  </p>
+
+                <h3>My Answers</h3>
+                <ul id="notes">
+                    <li>
+                        <p class="no-notes">You don't have any answers.</p>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{{url_for('static',filename='js/script.js')}}"></script>
+
+
+
+    </body>
+</html>

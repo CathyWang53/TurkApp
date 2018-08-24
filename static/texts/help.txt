@@ -1,0 +1,7 @@
+Instructions:
+ 
+Find the similarity of the movies in the first line by comparing them with the movies in the second line. Imagine you want movies like the ones in the first line. 
+ 
+Move your cursor onto the movie poster, more information about this movie will show up.
+ 
+After you have got your answer, click speak button to speak as you are talking to your TV. It's good to speak naturally. 
