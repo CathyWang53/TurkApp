@@ -7,10 +7,31 @@ import os
 pyint = 1
 skipTime = 0
 movieNum = 10
+count=0
+
+genres = ["Action","Adventure","Animation","Comedy","Crime",
+          "Documentary","Drama","Fantasy","Horror","Mystery","Romance",
+          "Thriller","War","Western"]
+
+pydata=[[0 for col in range(10)] for row in range(movieNum)]
 
 # Read data from movies.csv
 # Data: movie name, poster address and detail info addr
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+#    genre for one webpage is randomly chosen from genres
+file1Name = THIS_FOLDER + '/moviedata/Genres/%s.csv' % ("Comedy")
+#    pydata reads 4 lines randomly from this csv file
+with open(file1Name) as file1:
+    reader=csv.reader(file1, delimiter=',')
+    count=0
+    for i,row in enumerate(reader):
+        if i == 2 or i == 8 or i == 10 or i == 20:  #here should be random integers
+            pydata[count] = row
+            count = count + 1
+print("This is pydata 0")
+print(pydata[0])
+
+    
 my_file = THIS_FOLDER + '/static/movies.csv'
 pydata1=[[0 for col in range(24)] for row in range(movieNum)]
 with open(my_file) as csv_file:
@@ -20,8 +41,6 @@ with open(my_file) as csv_file:
         pydata1[count] = row
         count = count + 1
 
-print("This is pydata1 2")
-print(pydata1[2])
 
 
 
@@ -29,33 +48,12 @@ bp = Blueprint('s1_noJS', __name__, url_prefix='/<int:pyint>/<int:skipTime>')
 
 @bp.route('/', methods=('GET', 'POST'))
 def scene1(pyint,skipTime):
-    return render_template('index_v2.html',
+    return render_template('index_v2_loop.html',
                            htmlint=pyint,
                            SkipTime=skipTime,
-                           Name1=pydata1[pyint][0],
-                           Poster1=pydata1[pyint][1],
-                           Detail1=pydata1[pyint][2],
-                           Name2=pydata1[pyint][3],
-                           Poster2=pydata1[pyint][4],
-                           Detail2=pydata1[pyint][5],
-                           Name3=pydata1[pyint][6],
-                           Poster3=pydata1[pyint][7],
-                           Detail3=pydata1[pyint][8],
-                           Name4=pydata1[pyint][9],
-                           Poster4=pydata1[pyint][10],
-                           Detail4=pydata1[pyint][11],
-                           Name5=pydata1[pyint][12],
-                           Poster5=pydata1[pyint][13],
-                           Detail5=pydata1[pyint][14],
-                           Name6=pydata1[pyint][15],
-                           Poster6=pydata1[pyint][16],
-                           Detail6=pydata1[pyint][17],
-                           Name7=pydata1[pyint][18],
-                           Poster7=pydata1[pyint][19],
-                           Detail7=pydata1[pyint][20],
-                           Name8=pydata1[pyint][21],
-                           Poster8=pydata1[pyint][22],
-                           Detail8=pydata1[pyint][23])
+                           Movies=pydata1,
+                           Count=0
+                           )
 
 
 
