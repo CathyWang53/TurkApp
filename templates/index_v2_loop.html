@@ -36,7 +36,7 @@
 <!--                        <h4 id="name"+Movies[Count*4]> {{Movies[Count*4+1]}} </h4>-->
 
 <!--poster ids start from 0-->
-                        <img id={{"poster"+Movies1[Count][0]}} src={{Movies[Count*4+2]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+                        <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
                         <h4 id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </h4>
                     </div>
                     {% endfor %}
@@ -57,7 +57,7 @@
                     <div class="col-2" title="movie-row-1">
 <!--                        <img id={{"poster"+Movies[Count*4]}} src={{Movies[Count*4+2]}}  alt={{"poster of" + Movies[Count*4+1]}} class="img-thumbnail" />-->
 <!--                        <h4 id="name"+Movies[Count*4]> {{Movies[Count*4+1]}} </h4>-->
-                        <img id={{"poster"+Movies1[Count][0]}} src={{Movies[Count*4+2]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+                        <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
                         <h4 id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </h4>
                     </div>
                     {% endfor %}
@@ -76,17 +76,18 @@
                 
  
                 <button id="help-btn" title="Help">Help</button>
-                <button id="save-note-sbtn" title="Save Note">Go next</button>
-                
-                <a href="/{{htmlint+1}}/{{SkipTime}}" id="go-next-btn"> go next2 </a>
-                <a href="/{{htmlint}}/{{SkipTime+1}}" id="skip-btn"> skip </a>
+<!--                <button id="save-note-sbtn" title="Save Note">Go next</button>-->
+
+                <a href="/{{htmlint+1}}/{{SkipTime}}" id="go-next-btn"> Go next      </a>
+                <a href="/{{htmlint}}/{{SkipTime+1}}" id="skip-btn"> Skip </a>
                 <p id="skip-inst"> SkipTime: {{SkipTime}} / 10 </p>
 
                 <p></p>
                     
 <!--                <iframe id="detail" src="" width=300 height=300></iframe>-->
-                <p id="detail1">detail1 </>
-                <!--for test-->
+                <p id="detail1"> </p>
+                
+                (for test)
                 <h3>My Answers</h3>
                 <ul id="notes">
                     <li>
@@ -116,29 +117,73 @@
 <!--        tutorial-->
          <script>
              $(function(){
+               $('#poster0').mouseover(function(){
+                                       //$('#detail').attr({"src":"{{Movies[3]}}"});
+                                       //$('#detail').show();
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[0][2]}}</p> <p>Actors: {{Movies1[0][3]}}</p> <p>Directors: {{Movies1[0][4]}}</p> <p>Release Date: {{Movies1[0][7]}} </p> <p> Languages: {{Movies1[0][8]}} </p>");
+                                       });
+               $('#poster0').mouseout(function(){
+                                      $('#detail1').hide();
+                                      });
+               
                
                $('#poster1').mouseover(function(){
-                            //$('#detail').attr({"src":"{{Movies[3]}}"});
-                            //$('#detail').show();
                                        $('#detail1').show();
-                            $('#detail1').html("<p>{{Movies1[1][6]}}</p>");
+                                       $('#detail1').html("<p>Genres: {{Movies1[1][2]}}</p> <p>Actors: {{Movies1[1][3]}}</p> <p>Directors: {{Movies1[1][4]}}</p> <p>Release Date: {{Movies1[1][7]}} </p> <p> Languages: {{Movies1[1][8]}} </p>");
                                        });
                $('#poster1').mouseout(function(){
                                       $('#detail1').hide();
                                       });
                $('#poster2').mouseover(function(){
-                        $('#detail').attr({"src":"{{Movies[4*1+3]}}"});
-                                       $('#detail').show();
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[2][2]}}</p> <p>Actors: {{Movies1[2][3]}}</p> <p>Directors: {{Movies1[2][4]}}</p> <p>Release Date: {{Movies1[2][7]}} </p> <p> Languages: {{Movies1[2][8]}} </p>");
                                        });
                $('#poster2').mouseout(function(){
-                                      $('#detail').hide();
+                                      $('#detail1').hide();
+                                      });
+               $('#poster3').mouseover(function(){
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[3][2]}}</p> <p>Actors: {{Movies1[3][3]}}</p> <p>Directors: {{Movies1[3][4]}}</p> <p>Release Date: {{Movies1[3][7]}} </p> <p> Languages: {{Movies1[3][8]}} </p>");
+                                       });
+               $('#poster3').mouseout(function(){
+                                      $('#detail1').hide();
+                                      });
+               $('#poster4').mouseover(function(){
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[4][2]}}</p> <p>Actors: {{Movies1[4][3]}}</p> <p>Directors: {{Movies1[4][4]}}</p> <p>Release Date: {{Movies1[4][7]}} </p> <p> Languages: {{Movies1[4][8]}} </p>");
+                                       });
+               $('#poster4').mouseout(function(){
+                                      $('#detail1').hide();
+                                      });
+               $('#poster5').mouseover(function(){
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[5][2]}}</p> <p>Actors: {{Movies1[5][3]}}</p> <p>Directors: {{Movies1[5][4]}}</p> <p>Release Date: {{Movies1[5][7]}} </p> <p> Languages: {{Movies1[5][8]}} </p>");
+                                       });
+               $('#poster5').mouseout(function(){
+                                      $('#detail1').hide();
+                                      });
+               $('#poster6').mouseover(function(){
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[6][2]}}</p> <p>Actors: {{Movies1[6][3]}}</p> <p>Directors: {{Movies1[6][4]}}</p> <p>Release Date: {{Movies1[6][7]}} </p> <p> Languages: {{Movies1[6][8]}} </p>");
+                                       });
+               $('#poster6').mouseout(function(){
+                                      $('#detail1').hide();
+                                      });
+               $('#poster7').mouseover(function(){
+                                       $('#detail1').show();
+                                       $('#detail1').html("<p>Genres: {{Movies1[7][2]}}</p> <p>Actors: {{Movies1[7][3]}}</p> <p>Directors: {{Movies1[7][4]}}</p> <p>Release Date: {{Movies1[7][7]}} </p> <p> Languages: {{Movies1[7][8]}} </p>");
+                                       });
+               $('#poster7').mouseout(function(){
+                                      $('#detail1').hide();
                                       });
                $('#help-btn').mouseover(function(){
-                                        $('#detail').attr({"src":"/static/texts/help.txt"});
-                                        $('#detail').show();
+                                        $('#detail1').attr({"src":"/static/texts/help.txt"});
+                                        $('#detail1').html("<p>Instructions:</p><p>Find the similarity of the movies in the first line by comparing them with the movies in the second line. Imagine you want movies like the ones in the first line.</p><p>Move your cursor onto the movie poster, more information about this movie will show up.</p><p>After you have got your answer, click speak button to speak as you are talking to your TV. It's good to speak naturally.</p>" )
+                                        $('#detail1').show();
                                         });
                $('#help-btn').mouseout(function(){
-                                       $('#detail').hide();
+                                       $('#detail1').hide();
                                        });
                if ({{SkipTime}}>=10) {
                $('#skip-btn').hide();
@@ -159,7 +204,7 @@
                       position: 'bottom'
                     },
                     {
-                      element: '#poster4',
+                      element: '#poster2',
                         intro: 'Move your cursor onto the movie poster, more information about this movie will show up.',
                         position: 'right'
                     },
