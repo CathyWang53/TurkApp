@@ -11,6 +11,6 @@ def create_app(test_config=None):
     app.register_blueprint(welcome.bp)
 
     from . import s1_v2
-    app.register_blueprint(s1_v2 .bp)
+    app.register_blueprint(s1_v2.bp)
 
     return app
