@@ -12,23 +12,23 @@ movieNum = 12
 count=0
 index=0
 
-queryFiles=["Leonardo DiCaprio","Alfred Hitchcock", "Mexico","Comedy",  "Shark","1960&2015","JapanAnime&Others","2018Horror&Others","2018Horror&Others1"]
-hideRow2Index = [0,1,2,3,4]
-showRow3Index = [8]
+queryFiles=["Nike","superhero","summer","JeanShorts","JeanShorts_3rows"]
+hideRow2Index = [0,1]
+showRow3Index = [4]
 
 pydata=[[0 for col in range(22)] for row in range(movieNum)]
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
-bp = Blueprint('s1_noJS', __name__, url_prefix='/<int:pyint>/<int:skipTime>')
+bp = Blueprint('tutorial', __name__, url_prefix='/tutorial/<int:pyint>/<int:skipTime>', static_url_path = "")
 
 @bp.route('/', methods=('GET', 'POST'))
 def scene1(pyint,skipTime):
     index=(pyint+skipTime)%len(queryFiles)
     queryFile = queryFiles[index]
-    file1Name = THIS_FOLDER + '/moviedata/%s.csv' % queryFile
-    print("the movies are from:")
+    file1Name = THIS_FOLDER + '/tutorialData/%s.csv' % queryFile
+    print("the items are from:")
     print(file1Name)
     with open(file1Name) as file1:
         reader=csv.reader(file1, delimiter=',')
@@ -46,10 +46,10 @@ def scene1(pyint,skipTime):
         print(' ')
         count = count + 1
 
-    return render_template('index_v2_loop.html',
+    return render_template('tutorial.html',
                            htmlint=pyint,
                            SkipTime=skipTime,
-                           Movies1=pydata,
+                           Items=pydata,
                            QueryTypeNum=len(queryFiles),
                            HideIndex=hideRow2Index,
                            ShowRow3Index=showRow3Index,

@@ -32,7 +32,7 @@ $('#example').hide();
 $('#moreExample').hide();
 help.hide();
 $('#go-next-btn').hide();
-$('#detail').hide();
+$('#detail1').hide();
 
 
 //function getInt(vars)
@@ -210,6 +210,12 @@ function change(){ //show up after 5 seconds
     }
 }
 
+$('#help-btn').mouseover(function(){
+                         $('#detail1').show();
+                         });
+$('#help-btn').mouseout(function(){
+                        $('#detail1').hide();
+                        });
 
 //notesList.on('click', function(e) {
 //  e.preventDefault();

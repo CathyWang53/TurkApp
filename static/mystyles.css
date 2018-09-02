@@ -11,4 +11,83 @@
     width:100%;
     margin:auto;
 }
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #000000;
+}
+
+.posters:hover .overlay {
+    opacity: 0.85;
+}
+
+/*detail info for movies*/
+.text {
+    color: white;
+    position: absolute;
+    left: 7px;
+    right: 7px;
+    top: 7px;
+    font-size:85%
+}
+
+/*posters*/
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px
+}
+.button:hover {
+    background-color: #7FD77F;
+    color: white;
+}
+
+/*speak button*/
+.speak-btn {
+    background-color: white;
+    border: 2px solid #4CAF50;
+    color: black;
+}
+
+/*the border for the whole app*/
+.app {
+    border:2px solid #a1a1a1;
+    padding:10px 20px;
+    background:#dddddd;
+    width:100%;
+    height:110%;
+/*    right:10%*/
+    border-radius:25px;
+}
+
+
+.help1 {
+    position: relative;
+    bottom: 400px;
+    left: 850px;
+    width: 25%;
+    height: 100%;
+    z-index:1;
+    background-color: #000000;
+    opacity: 0.85;
+    color: white;
+    border-radius:25px;
+    padding: 5px 5px;
+}
+
 

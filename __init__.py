@@ -12,5 +12,8 @@ def create_app(test_config=None):
 
     from . import s1_v2
     app.register_blueprint(s1_v2.bp)
+    
+    from . import tutorial
+    app.register_blueprint(tutorial.bp)
 
     return app
