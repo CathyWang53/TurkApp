@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>scenariol 1</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='mystyles.css') }}">
+<!--        Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--            intro.js-->
+        <link rel="stylesheet" href="/static/intro_js/node_modules/intro.js/introjs.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    </head>
+    
+    <body>
+        <div class="container">
+
+            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+            
+            {% block headline %}
+            <div class="row">
+                <h2 id="headline">Scenario: {{htmlint}} / 10 </h2>
+            </div>
+            {% endblock %}
+            
+<!--            {% block app %}{% endblock %}-->
+
+            <div class="app">
+                <div class="row" id="sum">
+                    <div class="col-8">
+<!--                        main app-->
+                        {% block movies %} {%endblock%}
+
+                    </div>
+                    {% block operation1 %}
+                    <div class="col-4" id="record">
+                        <h3 class="text-center"> What would you say? </h3>
+                        <p></p>
+                        <div align="center">
+                            <button  id="speak" title="speak" class="button speak-btn"> <img src="/static/images/favicon-32x32.png"/>Speak</button>
+                            <p id="recording-instructions">  Note: Please speak naturally.</p>
+                            <a href="/{{htmlint+1}}/{{SkipTime}}" id="go-next-btn" class="button" > Go next      </a>
+                        </div>
+                        <p></p>
+                    </div>
+                    {% endblock %}
+                </div>
+                {% block operation2 %}
+                <div class="row" id="operation">
+                        <div class="col-12" align="right">
+                            <a href="/{{htmlint}}/{{SkipTime+1}}" id="skip-btn" class="button"> Skip ({{SkipTime}}/10)</a>
+                            <button id="help-btn" title="Help" class="button">Help</button>
+                        </div>
+                </div>
+                {% endblock %}
+            </div>
+        
+        {% block help %} {%endblock%}
+        
+        {% block test %}
+                (for test)
+                <h3>My Answers</h3>
+                <ul id="notes">
+                    <li>
+                        <p class="no-notes">You don't have any answers.</p>
+                    </li>
+                </ul>
+        {% endblock %}
+        
+
+        <script src="{{url_for('static',filename='js/script_v2.js')}}"></script>
+
+<!--        Bootstrap-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+<!--        intro.js-->
+        <script type="text/javascript" src="/static/intro_js/node_modules/intro.js/intro.js"></script>
+<!--        <script type="text/javascript">introJs().start();</script>-->
+
+
+{% block myJS %} {% endblock %}
+
+
+    </body>
+</html>

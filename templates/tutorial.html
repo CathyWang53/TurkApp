@@ -1,79 +1,81 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>scenariol 1</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        
-<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='mystyles.css') }}">
-<!--        Bootstrap-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!--            intro.js-->
-        <link rel="stylesheet" href="/static/intro_js/node_modules/intro.js/introjs.css"/>
-
-    </head>
+    {% block headline %}
+    <h2 id="headline"> Tutorial: {{htmlint+SkipTime+1}} / 4 </h2>
+    {% endblock %}
     
-    <body>
-        <div class="container">
+    {% block movies %}
+        <div class="row" id="instruction1">
+            <h4>You want clothes like these:</h4>
+        </div>
 
-            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
-
-                <h1 id="headline"> Tutorial: {{htmlint+SkipTime+1}} / 4 </h1>
-            <div class="app" id="app">
-                <div class="row" id="instruction1">
-                   <h2>You want clothes like these:</h2>
-                </div>
                 <div class="row" id="movie-row-1">
-<!--                    The 4 movies in the first row-->
+<!--                    The 4 clothes in the first row-->
                     {% for Count in range(0,4) %}
-                    <div class="col-2" title="movie-row-1">
-<!--poster ids start from 0-->
-                        <img id={{"poster"+Items[Count][0]}} src="{{"../../../"+Items[Count][5]}}"  alt={{"poster of" + Items[Count][1]}} class="img-thumbnail" />
-                        <h4 id="name"+Items[Count][0]> {{Items[Count][1]}} </h4>
+                    <div class="col-3" title="movie-row-1">
+                        <!--poster ids start from 0-->
+                        <div class="posters">
+                            <img id={{"poster"+Items[Count][0]}} src="{{"../../../"+Items[Count][5]}}"  alt={{"poster of" + Items[Count][1]}} class="img-thumbnail" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <p> {{Items[0][1]}}</p>
+                                    <p>Brand: {{Items[0][2]}}</p>
+                                    <p>Discription: {{Items[0][3]}}</p>
+                                    <p>Price: {{Items[0][4]}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
-
-
-                   <div class="col-4" >
-                       <h5 class="text-center"> What would you say to your TV? </h5>
-                       <button  id="speak" title="speak">Speak</button>
-                       <p id="recording-instructions">  </p>
-                   </div>
                 </div>
+                <div class="row" title="movieName">
+                    {% for Count in range(0,4) %}
+                    <div class="col-3">
+                        <p id="name"+Items[Count][0]> {{Items[Count][1]}} </p>
+                    </div>
+                    {% endfor %}
+                </div>
+                
                 
                 {% if (htmlint+SkipTime) not in HideIndex %}
                 <div class="row">
-                    <h2>Rather than these:</h2>
+                    <h4>Rather than these:</h4>
                 </div>
-                {% endif %}
-<!--                The 4 movies in the second row-->
+                <!--                The 4 movies in the second row-->
                 <div class="row" id="movie-row-2">
                     {% for Count in range(4,8) %}
-                    <div class="col-2">
-                        {% if (htmlint+SkipTime) not in HideIndex  %}
-                        <img id={{"poster"+Items[Count][0]}} src="{{ "../../../"+Items[Count][5]}}"  alt={{"poster of" + Items[Count][1]}} class="img-thumbnail" />
-                        <h4 id="name"+Items[Count][0]> {{Items[Count][1]}} </h4>
-                        {% endif %}
+                    <div class="col-3" title="movie-row-2">
+                        <div class="posters">
+                            <img id={{"poster"+Items[Count][0]}} src="{{ "../../../"+Items[Count][5]}}"  alt={{"poster of" + Items[Count][1]}} class="img-thumbnail" />
+                            <div class="overlay">
+                                <div class="text">
+                                    <p> {{Items[0][1]}}</p>
+                                    <p>Brand: {{Items[0][2]}}</p>
+                                    <p>Discription: {{Items[0][3]}}</p>
+                                    <p>Price: {{Items[0][4]}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
-
-                    <div class="col-4" >
-<!--                        <div class="input-single">-->
-<!--                            <textarea id="note-textarea" placeholder="What we heard..." rows="10"></textarea>-->
-<!--                        </div>-->
-                    </div>
                 </div>
+                    
+                <div class="row" title="movieName">
+                    {% for Count in range(4,8) %}
+                    <div class="col-3">
+                        <p id="name"+Items[Count][0]> {{Items[Count][1]}} </p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 
                 {% if (htmlint+SkipTime) in ShowRow3Index %}
                 <div class="row">
                     <h2>Or these:</h2>
                 </div>
                 {% endif %}
-                <!--                The 4 movies in the second row-->
+                <!--                The 4 movies in the third row-->
                 {% if (htmlint+SkipTime) in ShowRow3Index  %}
                 <div class="row">
                     {% for Count in range(8,12) %}
@@ -85,125 +87,48 @@
                 </div>
                 {% endif %}
                 
+                {% endblock %}
+                
 <!--                <div class="row">-->
 
-
-                <button id="help-btn" title="Help">Help</button>
                 
-                {% if (htmlint+SkipTime) == 3  %}
-<!--                <button id="save-note-sbtn" title="Save Note">Go next</button>-->
-                <a href="/0/0" id="go-next-btn"> Go next      </a>
-                {% else %}
-                <a href="/tutorial/{{htmlint+1}}/0" id="go-next-btn"> Go next      </a>
-                {% endif %}
+<!--                {% if (htmlint+SkipTime) == 3  %}-->
+<!--                <a href="/0/0" id="go-next-btn"> Go next      </a>-->
+<!--                {% else %}-->
+<!--                <a href="/tutorial/{{htmlint+1}}/0" id="go-next-btn"> Go next      </a>-->
+<!--                {% endif %}-->
 
+                {% block operation1 %}
+                    {{ super() }}
+                    {% if (htmlint+SkipTime) == 3  %}
+                        <script>
+                            $("#go-next-btn").attr("href", "/0/0");
+                        </script>
+                    {% else %}
+                        <script>
+                            $("#go-next-btn").attr("href", "/1/{{htmlint+1}}/0");
+                        </script>
+                    {% endif %}
+                {% endblock %}
+                
+                {% block operation2 %}
+                    {{ super() }}
+                    <script>
+                        $("#skip-btn").hide();
+                    </script>
+                {% endblock %}
+                
                 <p></p>
                     
 <!--                <iframe id="detail" src="" width=300 height=300></iframe>-->
-                <p id="detail1"> </p>
-                
-                
-
-            </div>
-            
-            (for test)
-            <h3>My Answers</h3>
-            <ul id="notes">
-                <li>
-                    <p class="no-notes">You don't have any answers.</p>
-                </li>
-            </ul>
-        </div>
-        
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="{{url_for('static',filename='js/script_v2.js')}}"></script>
-        
-<!--        Bootstrap-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-<!--        intro.js-->
-        <script type="text/javascript" src="/static/intro_js/node_modules/intro.js/intro.js"></script>
-<!--        <script type="text/javascript">introJs().start();</script>-->
-
-<!--        show detial info for each movie and help button-->
 
 
+{% block myJS %}
         
 <!--        tutorial-->
          <script>
              $(function(){
-               $('#poster0').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("<p> {{Items[0][1]}}</p> <p>Brand: {{Items[0][2]}}</p> <p>Discription: {{Items[0][3]}}</p> <p>Price: {{Items[0][4]}}</p>");
-                                       });
-               $('#poster0').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               
-               
-               $('#poster1').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html();
-                                       });
-               $('#poster1').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#poster2').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("");
-                                       });
-               $('#poster2').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#poster3').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("");
-                                       });
-               $('#poster3').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#poster4').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("");
-                                       });
-               $('#poster4').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#poster5').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("");
-                                       });
-               $('#poster5').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#poster6').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("");
-                                       });
-               $('#poster6').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#poster7').mouseover(function(){
-                                       $('#detail1').show();
-                                       $('#detail1').html("");
-                                       });
-               $('#poster7').mouseout(function(){
-                                      $('#detail1').hide();
-                                      });
-               $('#help-btn').mouseover(function(){
-                                        $('#detail1').attr({"src":"/static/texts/help.txt"});
-                                        $('#detail1').html("<p>Instructions:</p><p>Imagine that you want the movies shown in the first row.</p><p>If you move your cursor over the picture, more information will appear.</p><p>To move to the next page, click speak button and ask for movies. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click \"next\". It's good to speak naturally.</p>" )
-                                        $('#detail1').show();
-                                        });
-               $('#help-btn').mouseout(function(){
-                                       $('#detail1').hide();
-                                       });
-               
                var introguide = introJs();
-               
-             
                
                if ({{SkipTime}}==0 & {{htmlint}}==0)
                {
@@ -264,7 +189,7 @@
                                              {
                                              element: '#movie-row-2',
                                              intro: 'We have added another row that shows items you don\'t want. In this case, you want clothes for warm weather (shown in the top row), not for cold weather.',
-                                             position: 'bottom'
+                                             position: 'top'
                                              }
                                              
                                              ]
@@ -291,6 +216,7 @@
                });
                
         </script>
+    {% endblock %}
 
     </body>
 </html>

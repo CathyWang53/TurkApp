@@ -8,6 +8,7 @@ from random import choice
 
 pyint = 1
 skipTime = 0
+flag=1
 movieNum = 12
 count=0
 index=0
@@ -95,6 +96,7 @@ def scene1(pyint,skipTime):
     return render_template('index_v2_loop.html',
                            htmlint=pyint,
                            SkipTime=skipTime,
+                           Flag=flag,
                            Movies1=pydata,
                            QueryTypeNum=len(queryFiles),
                            HideIndex=hideRow2Index,

@@ -1,185 +1,104 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>scenariol 1</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        
-<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='mystyles.css') }}">
-<!--        Bootstrap-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!--            intro.js-->
-        <link rel="stylesheet" href="/static/intro_js/node_modules/intro.js/introjs.css"/>
-
-    </head>
-    
-    <body>
-        <div class="container">
-
-            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
-            
-            <div class="row">
-                <h2 id="headline">Scenario: {{htmlint}} / 10 </h2>
-            </div>
-            <div class="app">
-                <div class="row" id="instruction1">
-                    <div class="col-8">
-                        <h4>  You want movies like these:</h4>
+    {% block movies %}
+    <div class="row" id="instruction1">
+        <div class="col-8">
+            <h4>  You want movies like these:</h4>
+        </div>
+    </div>
+    <div class="row" id="movie-row-1">
+        <!--                    The 4 movies in the first row-->
+        {% for Count in range(0,4) %}
+        <div class="col-3" title="movie-row-1">
+            <div class="posters">
+                <!--poster ids start from 0-->
+                <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+                <div class="overlay">
+                    <div class="text">
+                        <p>Genres: {{Movies1[Count][2]}}</p>
+                        <p>Actors: {{Movies1[Count][3]}}</p>
+                        <p>Directors: {{Movies1[Count][4]}}</p>
+                        <p>Languages: {{Movies1[Count][8]}} </p>
                     </div>
                 </div>
-                <div class="row" id="movie-row-1">
-<!--                    The 4 movies in the first row-->
-                    {% for Count in range(0,4) %}
-                    <div class="col-2" title="movie-row-1">
-                        <div class="posters">
-                            <!--poster ids start from 0-->
-                            <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
-                            <div class="overlay">
-                                <div class="text">
-                                <p>Genres: {{Movies1[Count][2]}}</p>
-                                <p>Actors: {{Movies1[Count][3]}}</p>
-                                <p>Directors: {{Movies1[Count][4]}}</p>
-                                <p>Languages: {{Movies1[Count][8]}} </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                   <div class="col-4" >
-                       <h3 class="text-center"> What would you say? </h3>
-                       <p></p>
-                       <div align="center">
-                       <button  id="speak" title="speak" class="button speak-btn"> <img src="/static/images/favicon-32x32.png"/>Speak</button>
-                       <p id="recording-instructions">  Note: Please speak naturally.</p>
-                       </div>
-                   </div>
-                </div>
-                
-                <div class="row" title="movieName">
-                    {% for Count in range(0,4) %}
-                    <div class="col-2">
-                        <p id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </p>
-                    </div>
-                    {% endfor %}
-                    <div class="col-4" align="center">
-                        <a href="/{{htmlint+1}}/{{SkipTime}}" id="go-next-btn" class="button" > Go next      </a>
-                    </div>
-                </div>
-                
-                {% if (htmlint+SkipTime) not in HideIndex %}
-                <div class="row">
-                    <div class="col-8">
-                    <h4>Rather than these:</h4>
-                    </div>
-                </div>
-                {% endif %}
-<!--                The 4 movies in the second row-->
-                <div class="row">
-                    {% for Count in range(4,8) %}
-                    <div class="col-2" title="movie-row-2">
-                        {% if (htmlint+SkipTime) not in HideIndex  %}
-                        <div class="posters">
-                            <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
-                            <div class="overlay">
-                                <div class="text">
-                                    <p>Genres: {{Movies1[Count][2]}}</p>
-                                    <p>Actors: {{Movies1[Count][3]}}</p>
-                                    <p>Directors: {{Movies1[Count][4]}}</p>
-                                    <p>Languages: {{Movies1[Count][8]}} </p>
-                                </div>
-                            </div>
-                        </div>
-<!--                        <h5 id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </h5>-->
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-
-                    <div class="col-4" >
-                        <!--                <button id="save-note-sbtn" title="Save Note">Go next</button>-->
-<!--                        <div class="input-single">-->
-<!--                            <textarea id="note-textarea" placeholder="What we heard..." rows="10"></textarea>-->
-<!--                        </div>-->
-                    </div>
-                </div>
-                <div class="row" title="movieName">
-                    {% if (htmlint+SkipTime) not in HideIndex %}
-                        {% for Count in range(4,8) %}
-                        <div class="col-2">
-                            <p id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </p>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="col-8">
-                        </div>
-                    {% endif %}
-                        
-                    <div class="col-4" align="right">
-                        <a href="/{{htmlint}}/{{SkipTime+1}}" id="skip-btn" class="button"> Skip ({{SkipTime}}/10)</a>
-                        <button id="help-btn" title="Help" class="button">Help</button>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-8">
-                    </div>
-                    <div class="col-4">
-                        
-                    </div>
-                </div>
-                {% if (htmlint+SkipTime) in ShowRow3Index %}
-                <div class="row">
-                    <h2>Or these:</h2>
-                </div>
-                {% endif %}
-                <!--                The 4 movies in the third row-->
-                {% if (htmlint+SkipTime) in ShowRow3Index  %}
-                <div class="row">
-                    {% for Count in range(8,12) %}
-                    <div class="col-2" title="movie-row-1">
-                        <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
-                        <p id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </p>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                
             </div>
         </div>
+        {% endfor %}
+    </div>
+    <div class="row" title="movieName">
+        {% for Count in range(0,4) %}
+        <div class="col-3">
+            <p id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+    {% if (htmlint+SkipTime) not in HideIndex %}
+    <div class="row">
+        <div class="col-12">
+            <h4>Rather than these:</h4>
+        </div>
+    </div>
+    
+    <!--                The 4 movies in the second row-->
+    <div class="row">
+        {% for Count in range(4,8) %}
+        <div class="col-3" title="movie-row-2">
+            <div class="posters">
+                <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+                <div class="overlay">
+                    <div class="text">
+                        <p>Genres: {{Movies1[Count][2]}}</p>
+                        <p>Actors: {{Movies1[Count][3]}}</p>
+                        <p>Directors: {{Movies1[Count][4]}}</p>
+                        <p>Languages: {{Movies1[Count][8]}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="row" title="movieName">
+        {% for Count in range(4,8) %}
+        <div class="col-3">
+            <p id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if (htmlint+SkipTime) in ShowRow3Index %}
+    <div class="row">
+        <h2>Or these:</h2>
+    </div>
+    {% endif %}
+    <!--                The 4 movies in the third row-->
+    {% if (htmlint+SkipTime) in ShowRow3Index  %}
+    <div class="row">
+        {% for Count in range(8,12) %}
+        <div class="col-3" title="movie-row-1">
+            <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+            <p id="name"+Movies1[Count][0]> {{Movies1[Count][1]}} </p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% endblock %}
 
-                <p></p>
-                    
-<!--                <iframe id="detail" src="" width=300 height=300></iframe>-->
+    {% block help %}
             <div class="help1" id="detail1">
                 <p>Instructions:</p><p>Imagine that you want the movies shown in the first row.</p><p>If you move your cursor over the picture, more information will appear.</p><p>To move to the next page, click speak button and ask for movies. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next". It's good to speak naturally.</p>
             </div>
-                
-                (for test)
-                <h3>My Answers</h3>
-                <ul id="notes">
-                    <li>
-                        <p class="no-notes">You don't have any answers.</p>
-                    </li>
-                </ul>
+    {% endblock %}
+            
+    
         
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="{{url_for('static',filename='js/script_v2.js')}}"></script>
-        
-<!--        Bootstrap-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-<!--        intro.js-->
-        <script type="text/javascript" src="/static/intro_js/node_modules/intro.js/intro.js"></script>
-<!--        <script type="text/javascript">introJs().start();</script>-->
-
-<!--        show detial info for each movie and help button-->
-
-
+    {% block myJS %}
         
 <!--        tutorial-->
          <script>
@@ -215,6 +134,5 @@
                if ({{SkipTime}}==0 & {{htmlint}}==0) introguide.start();
                });
         </script>
-
-    </body>
+    {% endblock %}
 </html>

@@ -11,6 +11,7 @@ skipTime = 0
 movieNum = 12
 count=0
 index=0
+flag=0
 
 queryFiles=["Nike","superhero","summer","JeanShorts","JeanShorts_3rows"]
 hideRow2Index = [0,1]
@@ -21,10 +22,10 @@ pydata=[[0 for col in range(22)] for row in range(movieNum)]
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
-bp = Blueprint('tutorial', __name__, url_prefix='/tutorial/<int:pyint>/<int:skipTime>', static_url_path = "")
+bp = Blueprint('tutorial', __name__, url_prefix='/<int:flag>/<int:pyint>/<int:skipTime>', static_url_path = "")
 
 @bp.route('/', methods=('GET', 'POST'))
-def scene1(pyint,skipTime):
+def scene1(flag,pyint,skipTime):
     index=(pyint+skipTime)%len(queryFiles)
     queryFile = queryFiles[index]
     file1Name = THIS_FOLDER + '/tutorialData/%s.csv' % queryFile
@@ -49,6 +50,7 @@ def scene1(pyint,skipTime):
     return render_template('tutorial.html',
                            htmlint=pyint,
                            SkipTime=skipTime,
+                           FLag=flag,
                            Items=pydata,
                            QueryTypeNum=len(queryFiles),
                            HideIndex=hideRow2Index,
