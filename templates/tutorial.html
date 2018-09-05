@@ -16,12 +16,13 @@
                     <div class="col-3" title="movie-row-1">
                         <!--poster ids start from 0-->
                         <div class="posters">
-                            <img id={{"poster"+Items[Count][0]}} src="{{"../../../"+Items[Count][5]}}"  alt={{"poster of" + Items[Count][1]}} class="img-thumbnail" />
+                            <img id={{"poster"+Items[Count][0]}} src="{{"../../../"+Items[Count][5]}}"
+                                alt="{{"poster of " + Items[Count][1]}}" class="img-thumbnail" />
                             <div class="overlay">
                                 <div class="text">
                                     <p> {{Items[0][1]}}</p>
                                     <p>Brand: {{Items[0][2]}}</p>
-                                    <p>Discription: {{Items[0][3]}}</p>
+<!--                                    <p>Discription: {{Items[0][3]}}</p>-->
                                     <p>Price: {{Items[0][4]}}</p>
                                 </div>
                             </div>
@@ -47,12 +48,12 @@
                     {% for Count in range(4,8) %}
                     <div class="col-3" title="movie-row-2">
                         <div class="posters">
-                            <img id={{"poster"+Items[Count][0]}} src="{{ "../../../"+Items[Count][5]}}"  alt={{"poster of" + Items[Count][1]}} class="img-thumbnail" />
+                            <img id={{"poster"+Items[Count][0]}} src="{{ "../../../"+Items[Count][5]}}"  alt="{{"poster of" + Items[Count][1]}}" class="img-thumbnail" />
                             <div class="overlay">
                                 <div class="text">
                                     <p> {{Items[0][1]}}</p>
                                     <p>Brand: {{Items[0][2]}}</p>
-                                    <p>Discription: {{Items[0][3]}}</p>
+<!--                                    <p>Discription: {{Items[0][3]}}</p>-->
                                     <p>Price: {{Items[0][4]}}</p>
                                 </div>
                             </div>
@@ -87,18 +88,16 @@
                 </div>
                 {% endif %}
                 
-                {% endblock %}
+        {% endblock %}
+        
+        {% block help %}
+            <div class="help1" id="detail1">
+                <p>Instructions:</p><p>Imagine that you want the clothes shown in the first row.</p><p>If you move your cursor over the picture, more information will appear.</p><p>To move to the next page, click speak button and ask for clothes. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next". It's good to speak naturally.</p>
+            </div>
+        {% endblock %}
                 
-<!--                <div class="row">-->
 
-                
-<!--                {% if (htmlint+SkipTime) == 3  %}-->
-<!--                <a href="/0/0" id="go-next-btn"> Go next      </a>-->
-<!--                {% else %}-->
-<!--                <a href="/tutorial/{{htmlint+1}}/0" id="go-next-btn"> Go next      </a>-->
-<!--                {% endif %}-->
-
-                {% block operation1 %}
+        {% block operation1 %}
                     {{ super() }}
                     {% if (htmlint+SkipTime) == 3  %}
                         <script>
@@ -116,14 +115,13 @@
                     <script>
                         $("#skip-btn").hide();
                     </script>
-                {% endblock %}
+        {% endblock %}
                 
                 <p></p>
-                    
-<!--                <iframe id="detail" src="" width=300 height=300></iframe>-->
+            
 
 
-{% block myJS %}
+        {% block myJS %}
         
 <!--        tutorial-->
          <script>

@@ -137,7 +137,8 @@ $('#speak').on('click',function(e){
                $('#go-next-btn').hide();
                RcdingFlag=true;
                $("#speak").html('Stop');
-        
+               
+               startRecording();
         }
     else //stop recording
         {
@@ -153,6 +154,18 @@ $('#speak').on('click',function(e){
                }
                RcdingFlag=false;
                $(this).html('Speak Again');
+               
+               stopRecording();
+               
+               // Save note to localStorage.
+               // The key is the dateTime with seconds, the value is the content of the note.
+               saveNote(new Date().toLocaleString(), noteContent);
+               
+               // Reset variables and update UI.
+               noteContent = '';
+               renderNotes(getAllNotes());
+               noteTextarea.val('');
+               finishFlag=false;
         }
 });
 
@@ -173,15 +186,6 @@ $('#save-note-btn').on('click', function(e) {
     instructions.text('Only after you answer this question, you can go next. If you have spoken, press stop button to finish.');
   }
   else {
-    // Save note to localStorage.
-    // The key is the dateTime with seconds, the value is the content of the note.
-    saveNote(new Date().toLocaleString(), noteContent);
-
-    // Reset variables and update UI.
-    noteContent = '';
-    renderNotes(getAllNotes());
-    noteTextarea.val('');
-    finishFlag=false;
     
     //go to the next page
                        //window.location.href='/jsint';

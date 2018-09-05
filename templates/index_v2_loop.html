@@ -13,7 +13,7 @@
         <div class="col-3" title="movie-row-1">
             <div class="posters">
                 <!--poster ids start from 0-->
-                <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+                <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  class="img-thumbnail" />
                 <div class="overlay">
                     <div class="text">
                         <p>Genres: {{Movies1[Count][2]}}</p>
@@ -47,7 +47,7 @@
         {% for Count in range(4,8) %}
         <div class="col-3" title="movie-row-2">
             <div class="posters">
-                <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}}  alt={{"poster of" + Movies1[Count][1]}} class="img-thumbnail" />
+                <img id={{"poster"+Movies1[Count][0]}} src={{"https://image.tmdb.org/t/p/w500" + Movies1[Count][5]}} class="img-thumbnail" />
                 <div class="overlay">
                     <div class="text">
                         <p>Genres: {{Movies1[Count][2]}}</p>
@@ -103,7 +103,7 @@
 <!--        tutorial-->
          <script>
              $(function(){
-               if ({{SkipTime}}>=10) {
+               if ({{SkipTime}}>=20) {
                $('#skip-btn').hide();
                $('#skip-inst').text("You have skipped for 10 times. So now you cannot skip again.")
                }

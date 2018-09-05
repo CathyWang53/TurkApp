@@ -13,9 +13,9 @@ movieNum = 12
 count=0
 index=0
 
-queryFiles=["Leonardo DiCaprio","Alfred Hitchcock", "Mexico","Comedy",  "Shark","1960&2015","JapanAnime&Others","2018Horror&Others","2018Horror&Others1"]
-hideRow2Index = [0,1,2,3,4]
-showRow3Index = [8]
+queryFiles=["Leonardo DiCaprio", "Jennifer Lawrence", "Alfred Hitchcock", "Miyazaki","Wes", "Mexico", "China","India", "Comedy","Romance","Disney", "Shark","Robot","Book", "1960&2015", "JapanAnime&Others", "2018Horror&Others", "2018Horror&Others1"]
+hideRow2Index = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
+showRow3Index = [17]
 
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -40,6 +40,7 @@ def scene1(pyint,skipTime):
             if i != 0:
                 pydata[count] = row
                 pydata[count][0]= str(count) #change movieId to 0~7
+                pydata[count][1]= str(pydata[count][1])
                 count = count + 1
 
     # delete redundant genres, only keep the first one
