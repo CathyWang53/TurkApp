@@ -1,4 +1,6 @@
 
+$(function () {
+
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
@@ -138,7 +140,8 @@ $('#speak').on('click',function(e){
                RcdingFlag=true;
                $("#speak").html('Stop');
                
-               startRecording();
+               //startRecording();
+               startRecordingMp3();
         }
     else //stop recording
         {
@@ -155,7 +158,8 @@ $('#speak').on('click',function(e){
                RcdingFlag=false;
                $(this).html('Speak Again');
                
-               stopRecording();
+               //stopRecording();
+               stopRecordingMp3();
                
                // Save note to localStorage.
                // The key is the dateTime with seconds, the value is the content of the note.
@@ -166,6 +170,8 @@ $('#speak').on('click',function(e){
                renderNotes(getAllNotes());
                noteTextarea.val('');
                finishFlag=false;
+               
+
         }
 });
 
@@ -312,4 +318,6 @@ function getAllNotes() {
 //function deleteNote(dateTime) {
 //  localStorage.removeItem('note-' + dateTime);
 //}
+  
+  });
 

@@ -22,7 +22,7 @@ var audioContext //audio context to help us record
 	*/
 
 	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-                  console.log("test");
+//                  console.log("test");
 		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
 		/*
@@ -32,14 +32,15 @@ var audioContext //audio context to help us record
 
 		*/
 		audioContext = new AudioContext();
-
-		//update the format 
+                                                          
+		//update the format
+        
 		document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
 
 		/*  assign to gumStream for later use  */
 		gumStream = stream;
         
-        console.log("test2");
+//        console.log("test2");
 		/* use the stream */
 		input = audioContext.createMediaStreamSource(stream);
 
@@ -47,9 +48,9 @@ var audioContext //audio context to help us record
 			Create the Recorder object and configure to record mono sound (1 channel)
 			Recording 2 channels  will double the file size
 		*/
-		rec = new Recorder(input,{numChannels:1})
-        console.log(test3)
-
+        rec = new Recorder(input,{numChannels:1,sampleBits:8})
+//        console.log("test3")
+                               
 		
 	}).catch(function(err) {
 	  	//enable the record button if getUserMedia() fails
@@ -61,11 +62,12 @@ var audioContext //audio context to help us record
 
 function startRecording() {
     
-    console.log("recordButton clicked");
+//    console.log("recordButton clicked");
     //start the recording process
+//    console.log(rec.sampleRate)
     rec.record()
     
-    console.log("Recording started");
+//    console.log("Recording started");
 }
 
 function pauseRecording(){
@@ -83,7 +85,7 @@ function pauseRecording(){
 }
 
 function stopRecording() {
-	console.log("stopButton clicked");
+//    console.log("stopButton clicked");
 
 	//disable the stop button, enable the record too allow for new recordings
 //    stopButton.disabled = true;
@@ -100,7 +102,17 @@ function stopRecording() {
 	gumStream.getAudioTracks()[0].stop();
 
 	//create the wav blob and pass it on to createDownloadLink
-	rec.exportWAV(createDownloadLink);
+//    rec.exportWAV(createDownloadLink);
+    
+    rec.exportWAV(function (blob) {
+                       //callback(blob);
+                       
+                       // create WAV download link using audio data blob
+                       createDownloadLink(blob);
+                       
+                       // Clear the Recorder to start again !
+                       rec.clear();
+                       }, "audio/mp3");
 }
 
 function createDownloadLink(blob) {
@@ -119,14 +131,14 @@ function createDownloadLink(blob) {
 
 	//save to disk link
 	link.href = url;
-	link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
+	link.download = filename+".mp3"; //download forces the browser to donwload the file using the  filename
 	link.innerHTML = "Save to disk";
 
 	//add the new audio element to li
 	li.appendChild(au);
 	
 	//add the filename to the li
-	li.appendChild(document.createTextNode(filename+".wav "))
+	li.appendChild(document.createTextNode(filename+".mp3 "))
 
 	//add the save to disk link to li
 	li.appendChild(link);
