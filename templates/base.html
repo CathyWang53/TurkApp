@@ -6,7 +6,7 @@
         <title>scenariol 1</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
+
 <!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">-->
         <link rel="stylesheet" href="{{ url_for('static', filename='mystyles.css') }}">
 <!--        Bootstrap-->
@@ -16,18 +16,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     </head>
-    
+
     <body>
         <div class="container">
 
             <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
-            
+
             {% block headline %}
             <div class="row">
-                <h2 id="headline">Scenario: {{htmlint}} / 10 </h2>
+              <div class="col-2">
+                <h2 id="headline">Scenario: {{htmlint+SkipTime+1}} </h2>
+              </div>
             </div>
             {% endblock %}
-            
+
 <!--            {% block app %}{% endblock %}-->
 
             <div class="app">
@@ -44,7 +46,7 @@
                         <div align="center">
                             <button  id="speak" title="speak" class="button speak-btn"> <img src="/static/images/favicon-32x32.png"/>Speak</button>
                             <p id="recording-instructions">  Note: Please speak naturally.</p>
-                            <a href="/{{htmlint+1}}/{{SkipTime}}" id="go-next-btn" class="button" > Go next      </a>
+                            <a href="/{{htmlint+1}}/0" id="go-next-btn" class="button" > Go next</a>
                         </div>
                         <p></p>
                     </div>
@@ -53,15 +55,14 @@
                 {% block operation2 %}
                 <div class="row" id="operation">
                         <div class="col-12" align="right">
-                            <a href="/{{htmlint}}/{{SkipTime+1}}" id="skip-btn" class="button"> Skip ({{SkipTime}}/10)</a>
-                            <button id="help-btn" title="Help" class="button">Help</button>
+                          <button id="help-btn" title="Help" class="button">Help</button>
                         </div>
                 </div>
                 {% endblock %}
             </div>
-        
+
         {% block help %} {%endblock%}
-        
+
         {% block test %}
                 (for test)
                 <body style="padding-top: 30px">
@@ -73,13 +74,13 @@
                                 </div>
 
                                 <ol class="convertedList"></ol>
-                                
+
                             </div>
                         </div>
                     </div>
-                
+
                 <div id="formats">Format: start recording to see sample rate</div>
-                
+
 <!--                <h3> My Recorder</h3>-->
 <!--                <ol id="recordingsList"></ol>-->
 
@@ -90,17 +91,17 @@
                     </li>
                 </ul>
         {% endblock %}
-        
+
 
 <!--        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>-->
 <!--        <script src="{{url_for('static',filename='js/recorder.js')}}"></script>-->
 <!--        <script src="{{url_for('static',filename='js/recordApp.js')}}"></script>-->
 
-        
+
 <!--        Bootstrap-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
+
 <!--        intro.js-->
         <script type="text/javascript" src="/static/intro_js/node_modules/intro.js/intro.js"></script>
 <!--        <script type="text/javascript">introJs().start();</script>-->
@@ -108,6 +109,8 @@
         <script src="{{url_for('static',filename='js/mic.js')}}"></script>
         <script src="{{url_for('static',filename='js/app.js')}}"></script>
 <!--tranverse to text-->
+
+
         <script src="{{url_for('static',filename='js/script_v2.js')}}"></script>
 
 

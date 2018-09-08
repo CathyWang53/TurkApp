@@ -1,4 +1,3 @@
-
 $(function () {
 
 try {
@@ -9,6 +8,7 @@ catch(e) {
   console.error(e);
   $('.no-browser-support').show();
   $('.app').hide();
+
 }
 
 
@@ -27,6 +27,7 @@ var RcdingFlag=false;
 var counter=0;
 var inst = setInterval(change, 1000);
 
+
 $('.no-browser-support').hide();
 $('#save-note-btn').hide();
 $('#morehelp').hide();
@@ -35,6 +36,7 @@ $('#moreExample').hide();
 help.hide();
 $('#go-next-btn').hide();
 $('#detail1').hide();
+
 
 
 //function getInt(vars)
@@ -49,22 +51,20 @@ renderNotes(notes);
 //var dynamic_data = JSON.parse(data);
 
 
-
-
 /*-----------------------------
-      Voice Recognition 
+      Voice Recognition
 ------------------------------*/
 
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds),
-// allowing us to keep recording even when the user pauses. 
+// allowing us to keep recording even when the user pauses.
 recognition.continuous = true;
 
-// This block is called every time the Speech APi captures a line. 
+// This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far. 
+  // It holds all the lines we have captured so far.
   // We only need the current one.
   var current = event.resultIndex;
 
@@ -82,7 +82,7 @@ recognition.onresult = function(event) {
   }
 };
 
-recognition.onstart = function() { 
+recognition.onstart = function() {
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
 }
 
@@ -96,14 +96,14 @@ recognition.onspeechend = function() {
 
 recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
-    instructions.text('No speech was detected. Try again.');  
+    instructions.text('No speech was detected. Try again.');
   };
 }
 
 
 
 /*-----------------------------
-      App buttons and input 
+      App buttons and input
 ------------------------------*/
 
 //$('#start-record-btn').on('click', function(e) {
@@ -139,7 +139,7 @@ $('#speak').on('click',function(e){
                $('#go-next-btn').hide();
                RcdingFlag=true;
                $("#speak").html('Stop');
-               
+
                //startRecording();
                startRecordingMp3();
         }
@@ -157,20 +157,20 @@ $('#speak').on('click',function(e){
                }
                RcdingFlag=false;
                $(this).html('Speak Again');
-               
+
                //stopRecording();
                stopRecordingMp3();
-               
+
                // Save note to localStorage.
                // The key is the dateTime with seconds, the value is the content of the note.
                saveNote(new Date().toLocaleString(), noteContent);
-               
+
                // Reset variables and update UI.
                noteContent = '';
                renderNotes(getAllNotes());
                noteTextarea.val('');
                finishFlag=false;
-               
+
 
         }
 });
@@ -192,14 +192,13 @@ $('#save-note-btn').on('click', function(e) {
     instructions.text('Only after you answer this question, you can go next. If you have spoken, press stop button to finish.');
   }
   else {
-    
+
     //go to the next page
                        //window.location.href='/jsint';
-    
-  }
-      
-});
 
+  }
+
+});
 
 
 
@@ -248,7 +247,7 @@ $('#help-btn').mouseout(function(){
 
 
 /*-----------------------------
-      Speech Synthesis 
+      Speech Synthesis
 ------------------------------*/
 
 //function readOutLoud(message) {
@@ -266,7 +265,7 @@ $('#help-btn').mouseout(function(){
 
 
 /*-----------------------------
-      Helper Functions 
+      Helper Functions
 ------------------------------*/
 
 //accept notes array and show them on the webpage
@@ -318,6 +317,5 @@ function getAllNotes() {
 //function deleteNote(dateTime) {
 //  localStorage.removeItem('note-' + dateTime);
 //}
-  
-  });
 
+  });

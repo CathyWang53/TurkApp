@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 <html lang="en">
+
+{% block headline %}
+<div class="row">
+  <div class="col-2">
+    <h2 id="headline">Part: {{htmlint+1}} / 6 </h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-2">
+    <h4 id="headline2">Scenario: {{SkipTime+1}} / 3 </h4>
+  </div>
+  <div class="col-10">
+    <h4 id="headline3"> Choose one to answer from three scenarios in this part. </h4>
+  </div>
+</div>
+{% endblock %}
+
     {% block movies %}
     <div class="row" id="instruction1">
         <div class="col-8">
@@ -33,15 +50,15 @@
         </div>
         {% endfor %}
     </div>
-    
-    
-    {% if (htmlint+SkipTime) not in HideIndex %}
+
+
+    {% if (3*htmlint+SkipTime) not in HideIndex %}
     <div class="row">
         <div class="col-12">
             <h4>Rather than these:</h4>
         </div>
     </div>
-    
+
     <!--                The 4 movies in the second row-->
     <div class="row">
         {% for Count in range(4,8) %}
@@ -60,7 +77,7 @@
         </div>
         {% endfor %}
     </div>
-    
+
     <div class="row" title="movieName">
         {% for Count in range(4,8) %}
         <div class="col-3">
@@ -69,7 +86,7 @@
         {% endfor %}
     </div>
     {% endif %}
-    
+
     {% if (htmlint+SkipTime) in ShowRow3Index %}
     <div class="row">
         <h2>Or these:</h2>
@@ -86,7 +103,7 @@
         {% endfor %}
     </div>
     {% endif %}
-    
+
     {% endblock %}
 
     {% block help %}
@@ -94,26 +111,74 @@
                 <p>Instructions:</p><p>Imagine that you want the movies shown in the first row.</p><p>If you move your cursor over the picture, more information will appear.</p><p>To move to the next page, click speak button and ask for movies. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next". It's good to speak naturally.</p>
             </div>
     {% endblock %}
-            
-    
-        
+
+    {% block operation2 %}
+    <div class="row" id="operation">
+            <div class="col-12" align="right">
+              <a href="/{{htmlint}}/{{SkipTime-1}}" id="back-btn" class="button"> Back</a>
+              <a href="/{{htmlint}}/{{SkipTime+1}}" id="next-btn" class="button"> Next</a>
+              <button id="help-btn" title="Help" class="button">Help</button>
+            </div>
+    </div>
+    {% endblock %}
+
+
+
 
     {% block myJS %}
-        
+
 <!--        tutorial-->
          <script>
              $(function(){
-               if ({{SkipTime}}>=20) {
-               $('#skip-btn').hide();
-               $('#skip-inst').text("You have skipped for 10 times. So now you cannot skip again.")
+               // if ({{SkipTime}}>=20) {
+               // $('#skip-btn').hide();
+               // $('#skip-inst').text("You have skipped for 10 times. So now you cannot skip again.")
+               // }
+               // else{
+               // $('#skip-btn').show();
+               // $('#skip-inst').text("SkipTime: {{SkipTime}} / 10")
+               // }
+                 var int1={{htmlint}};
+                 var int2={{SkipTime}};
+                 var partNum={{partNum}};
+
+               if (int1 != partNum-1){
+                 $('#go-next-btn').html("Go next part");
+                 if (int2 == 0 ) //the first page of a part
+                 {
+                   $('#back-btn').hide();
+                 }
+                 else
+                 {
+                   $('#back-btn').show();
+                   console.log(int2);
+                 }
+
+                 if (int2 == 2) //the last page of a part
+                 {
+                   $('#next-btn').hide();
+                 }
+                 else $('#next-btn').show();
                }
-               else{
-               $('#skip-btn').show();
-               $('#skip-inst').text("SkipTime: {{SkipTime}} / 10")
+               else {
+                 if (int2 != 2)
+                 {
+                   $('#go-next-btn').html("Go next scenario");
+                   $('#go-next-btn').attr("href","/{{htmlint}}/{{SkipTime+1}}");
+
+                 }
+                 else{
+                   $('#headline3').html("Answer every scenario in this part.");
+                   $('#go-next-btn').html("Finish");
+                   $('#go-next-btn').attr("href","/{{htmlint}}/{{SkipTime+1}}");
+                 }
+                  $('#back-btn').hide();
+                 $('#next-btn').hide();
                }
-               
+
+
                var introguide = introJs();
-               
+
                introguide.setOptions({
                   steps: [
                     {
@@ -121,17 +186,32 @@
                           intro: 'Now the tutorial has ended. The rest of the tasks will ask you about movies.',
                           position: 'bottom'
                     },
-                    {
-                        element: '#skip-btn',
-                        intro: 'If you cannot understand this scenario, you can skip ahead. You can skip up to 10 of these (and, you must provide 10 responses to get paid).',
-                        position: 'right'
-                    },
-                    
-                    
+                    // {
+                    //     element: '#',
+                    //     intro: 'If you cannot understand this scenario, you can skip ahead. You can skip up to 10 of these (and, you must provide 10 responses to get paid).',
+                    //     position: 'right'
+                    // },
+
+
                     ]
                 });
-               
+
                if ({{SkipTime}}==0 & {{htmlint}}==0) introguide.start();
+
+               if (int1 == partNum-1 & int2 == 0){
+                 introguide.setOptions({
+                 steps: [
+                   {
+                         element: '#headline3',
+                         intro: 'In this part, you have to answer every scenario in order to go next.',
+                         position: 'bottom'
+                   }
+                   ]
+               });
+               introguide.start();
+
+               }
+
                });
         </script>
     {% endblock %}

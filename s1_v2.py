@@ -13,9 +13,18 @@ movieNum = 12
 count=0
 index=0
 
-queryFiles=["Leonardo DiCaprio", "Jennifer Lawrence", "Alfred Hitchcock", "Miyazaki","Wes", "Mexico", "China","India", "Comedy","Romance","Disney", "Shark","Robot","Book", "1960&2015", "JapanAnime&Others", "2018Horror&Others", "2018Horror&Others1"]
-hideRow2Index = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
-showRow3Index = [17]
+#define
+partNum=6
+
+queryFiles=["Leonardo DiCaprio", "Jennifer Lawrence","Jennifer Lawrence",
+            "Alfred Hitchcock", "Miyazaki","Wes",
+            "Mexico", "China","India",
+            "Comedy","Romance","Disney",
+            "Shark","Robot","Book",
+            "1960&2015", "JapanAnime&Others", "2018Horror&Others",
+            "2018Horror&Others1","Book",]
+hideRow2Index = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+showRow3Index = [18]
 
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +34,7 @@ bp = Blueprint('s1_noJS', __name__, url_prefix='/<int:pyint>/<int:skipTime>')
 
 @bp.route('/', methods=('GET', 'POST'))
 def scene1(pyint,skipTime):
-    index=(pyint+skipTime)%len(queryFiles)
+    index=(3*pyint+skipTime)%len(queryFiles)
     queryFile = queryFiles[index]
     file1Name = THIS_FOLDER + '/moviedata/%s.csv' % queryFile
     print("the movies are from:")
@@ -102,6 +111,7 @@ def scene1(pyint,skipTime):
                            QueryTypeNum=len(queryFiles),
                            HideIndex=hideRow2Index,
                            ShowRow3Index=showRow3Index,
+                           partNum=partNum,
                            Count=0)
 
 
