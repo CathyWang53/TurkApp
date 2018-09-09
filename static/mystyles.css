@@ -28,6 +28,10 @@
     opacity: 0.85;
 }
 
+.logol{
+  opacity:0.7;
+}
+
 /*detail info for movies*/
 .text {
     color: white;
@@ -89,5 +93,3 @@
     border-radius:25px;
     padding: 5px 5px;
 }
-
-

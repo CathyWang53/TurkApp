@@ -161,6 +161,7 @@
                  else $('#next-btn').show();
                }
                else {
+                 $('#headline3').html("Answer every scenario in this part.");
                  if (int2 != 2)
                  {
                    $('#go-next-btn').html("Go next scenario");
@@ -168,9 +169,8 @@
 
                  }
                  else{
-                   $('#headline3').html("Answer every scenario in this part.");
                    $('#go-next-btn').html("Finish");
-                   $('#go-next-btn').attr("href","/{{htmlint}}/{{SkipTime+1}}");
+                   $('#go-next-btn').attr("href","/finish");
                  }
                   $('#back-btn').hide();
                  $('#next-btn').hide();

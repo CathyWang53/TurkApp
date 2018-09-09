@@ -16,11 +16,11 @@ index=0
 #define
 partNum=6
 
-queryFiles=["Leonardo DiCaprio", "Jennifer Lawrence","Jennifer Lawrence",
+queryFiles=["Leonardo DiCaprio", "Jennifer Lawrence","Hepburn",
             "Alfred Hitchcock", "Miyazaki","Wes",
             "Mexico", "China","India",
             "Comedy","Romance","Disney",
-            "Shark","Robot","Book",
+            "Shark","Robot","Female",
             "1960&2015", "JapanAnime&Others", "2018Horror&Others",
             "2018Horror&Others1","Book",]
 hideRow2Index = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]

@@ -9,6 +9,9 @@ def create_app(test_config=None):
 
     from . import welcome
     app.register_blueprint(welcome.bp)
+    
+    from . import finish
+    app.register_blueprint(finish.bp)
 
     from . import s1_v2
     app.register_blueprint(s1_v2.bp)
