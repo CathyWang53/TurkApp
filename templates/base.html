@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!--            intro.js-->
         <link rel="stylesheet" href="/static/intro_js/node_modules/intro.js/introjs.css"/>
+        <link href="/static/intro_js/node_modules/intro.js/themes/introjs-modern.css" rel="stylesheet">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     </head>
@@ -43,18 +45,18 @@
                     <div class="col-4" id="record">
                       <div class="row">
                         <div class="col-12" align="right">
-                          <div class="logol">
+                          <!-- <div class="logol">
                             <img id="LabLogol" src="/static/images/GroupLens_Logo-125.png" />
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                         <p></p>
-                        <h3 class="text-center"> What would you say? </h3>
+                        <h3 class="text-center" id="recording-title"> What would you say? </h3>
                         <p></p>
                         <div align="center">
                             <button  id="speak" title="speak" class="button speak-btn"> <img src="/static/images/favicon-32x32.png"/>Speak</button>
-                            <p id="recording-instructions">  Note: Please speak naturally.</p>
-                            <a href="/{{htmlint+1}}/0" id="go-next-btn" class="button" > Go next</a>
+                            <h4 id="recording-instructions" >  Note: Please speak naturally.</h4>
+                            <a href="{{htmlint+1}}/0" id="go-next-btn" class="button" > Go next</a>
                         </div>
                         <p></p>
                     </div>
@@ -89,9 +91,8 @@
 
                 <div id="formats">Format: start recording to see sample rate</div>
 
-<!--                <h3> My Recorder</h3>-->
-<!--                <ol id="recordingsList"></ol>-->
-
+               <h3> My Recorder</h3>
+              <ol id="recordingsList"></ol>
                 <h3>My Answers</h3>
                 <ul id="notes">
                     <li>

@@ -22,10 +22,10 @@ pydata=[[0 for col in range(22)] for row in range(movieNum)]
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
-bp = Blueprint('tutorial', __name__, url_prefix='/<int:flag>/<int:pyint>/<int:skipTime>', static_url_path = "")
+bp = Blueprint('tutorial', __name__, url_prefix='/tutorial/<int:pyint>/<int:skipTime>', static_url_path = "")
 
 @bp.route('/', methods=('GET', 'POST'))
-def scene1(flag,pyint,skipTime):
+def scene1(pyint,skipTime):
     index=(pyint+skipTime)%len(queryFiles)
     queryFile = queryFiles[index]
     file1Name = THIS_FOLDER + '/tutorialData/%s.csv' % queryFile

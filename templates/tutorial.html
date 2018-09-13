@@ -2,13 +2,31 @@
 {% extends "base.html" %}
 <html lang="en">
     {% block headline %}
-    <h2 id="headline"> Tutorial: {{htmlint+SkipTime+1}} / 4 </h2>
+    <p></p>
+    <div class="row">
+      <div class="col-2">
+        <h2 id="headline1">Part: 1 / 3 </h2>
+        {% if (htmlint+SkipTime) > 1  %}
+          <script>
+            $('#headline1').html('<h2> Part: 2 / 3  </h2>');
+          </script>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <h4 id="headline"> Tutorial: {{(htmlint+SkipTime)%2+1}} / 2 </h4>
+      </div>
+    </div>
     {% endblock %}
-    
+
     {% block movies %}
         <div class="row" id="instruction1">
-            <h4>You want clothes like these:</h4>
+          <div class="col-12">
+            <img id=“wishList” height="40" width="40" src="/static/images/wish-list-icon3.png" />
+          </div>
         </div>
+        <p></p>
 
                 <div class="row" id="movie-row-1">
 <!--                    The 4 clothes in the first row-->
@@ -19,12 +37,14 @@
                             <img id={{"poster"+Items[Count][0]}} src="{{"../../../"+Items[Count][5]}}"
                                 alt="{{"poster of " + Items[Count][1]}}" class="img-thumbnail" />
                             <div class="overlay">
+                              <div class="detail" id={{"detail"+Items[Count][0]}}>
                                 <div class="text">
-                                    <p> {{Items[0][1]}}</p>
-                                    <p>Brand: {{Items[0][2]}}</p>
+                                    <p> {{Items[Count][1]}}</p>
+                                    <p>Brand: {{Items[Count][2]}}</p>
 <!--                                    <p>Discription: {{Items[0][3]}}</p>-->
-                                    <p>Price: {{Items[0][4]}}</p>
+                                    <p>Price: {{Items[Count][4]}}</p>
                                 </div>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -37,12 +57,15 @@
                     </div>
                     {% endfor %}
                 </div>
-                
-                
+
+
                 {% if (htmlint+SkipTime) not in HideIndex %}
                 <div class="row">
-                    <h4>Rather than these:</h4>
+                  <div class="col">
+                    <img id=“dislikeList” height="40" width="40" src="/static/images/dislike-list-icon.png" />
+                  </div>
                 </div>
+                <p></p>
                 <!--                The 4 movies in the second row-->
                 <div class="row" id="movie-row-2">
                     {% for Count in range(4,8) %}
@@ -51,17 +74,17 @@
                             <img id={{"poster"+Items[Count][0]}} src="{{ "../../../"+Items[Count][5]}}"  alt="{{"poster of" + Items[Count][1]}}" class="img-thumbnail" />
                             <div class="overlay">
                                 <div class="text">
-                                    <p> {{Items[0][1]}}</p>
-                                    <p>Brand: {{Items[0][2]}}</p>
+                                    <p> {{Items[Count][1]}}</p>
+                                    <p>Brand: {{Items[Count][2]}}</p>
 <!--                                    <p>Discription: {{Items[0][3]}}</p>-->
-                                    <p>Price: {{Items[0][4]}}</p>
+                                    <p>Price: {{Items[Count][4]}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
-                    
+
                 <div class="row" title="movieName">
                     {% for Count in range(4,8) %}
                     <div class="col-3">
@@ -70,7 +93,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
                 {% if (htmlint+SkipTime) in ShowRow3Index %}
                 <div class="row">
                     <h2>Or these:</h2>
@@ -87,132 +110,170 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                
+
         {% endblock %}
-        
+
         {% block help %}
-            <div class="help1" id="detail1">
-                <p>Instructions:</p><p>Imagine that you want the clothes shown in the first row.</p><p>If you move your cursor over the picture, more information will appear.</p><p>To move to the next page, click speak button and ask for clothes. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next". It's good to speak naturally.</p>
+            <div class="help1" id="help1">
+                <p>Instructions:</p>
+                <p id="imagine"> Imagine that you are browsing for the particular kind of clothes characterized by the four pictures shown here.</p>
+                <p>If you move your cursor over the picture, more information will appear.</p>
+                <p id="clothesName"> </p>
+                <p>To move to the next page, click speak button and ask for clothes.
+                  Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo.
+                  Then click "next". It's good to speak naturally.</p>
             </div>
         {% endblock %}
-                
+
 
         {% block operation1 %}
                     {{ super() }}
-                    {% if (htmlint+SkipTime) == 3  %}
+                    {% if (htmlint+SkipTime) == 1  %}
                         <script>
-                            $("#go-next-btn").attr("href", "/0/0");
+                            $("#go-next-btn").attr("href", "/1/0/0");
                         </script>
+                    {% elif (htmlint+SkipTime) == 3  %}
+                          <script>
+                              $("#go-next-btn").attr("href", "/1/5/0");
+                          </script>
                     {% else %}
                         <script>
-                            $("#go-next-btn").attr("href", "/1/{{htmlint+1}}/0");
+                            $("#go-next-btn").attr("href", "/tutorial/{{htmlint+SkipTime+1}}/0");
                         </script>
                     {% endif %}
+
+
                 {% endblock %}
-                
+
                 {% block operation2 %}
                     {{ super() }}
                     <script>
                         $("#skip-btn").hide();
                     </script>
-        {% endblock %}
-                
+                    {% endblock %}
+
                 <p></p>
-            
+
 
 
         {% block myJS %}
-        
+
 <!--        tutorial-->
          <script>
              $(function(){
                var introguide = introJs();
-               
+
                if ({{SkipTime}}==0 & {{htmlint}}==0)
                {
                introguide.setOptions({
                                      steps: [
+
                                              {
                                              element: '#headline',
-                                             intro: 'Let\'s begin the tutorial to learn the interface. Click next.',
+                                             intro: 'Let\'s begin the tutorial to learn the interface of this part.',
                                              position: 'bottom'
                                              },
                                              {
                                              element: '#instruction1',
-                                             intro: 'Imagine that you want the clothes shown here. ',
+                                             //intro: 'Imagine that you want the clothes shown here. ',
+                                             intro: 'Imagine that you are browsing for the particular kind of clothes characterized by the four pictures shown here. ',
                                              position: 'bottom'
                                              },
                                              {
-                                             element: '#poster2',
-                                             intro: 'If you move your cursor over the picture, more information will appear.',
+                                             element: '#movie-row-1',
+                                             intro: 'If you move your cursor over the pictures, more information will appear.',
                                              position: 'right'
                                              },
                                              {
                                              element: '#movie-row-1',
                                              intro: 'In this scenario, the pictures show clothes with the Nike logo.',
-                                             position: 'bottom'
+                                             position: 'right'
+                                             },
+                                             {
+                                             element: '#recording-title',
+                                             //intro: 'To move to the next page, click this button and ask for nike clothes. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo.',
+                                             intro: 'Imagine that you are asking for Nike clothes to an intelligent assistant such as Siri or Amazon Echo.',
+
+                                             //see what different here to ask for a friend/employee
+                                             position: 'left'
                                              },
                                              {
                                              element: '#speak',
-                                             intro: 'To move to the next page, click this button and ask for nike clothes. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next".',
-                                             //see what different here to ask for a friend/employee
-                                             position: 'right'
+                                             intro: 'Click "Done" to close this box. Then click “Speak” button and ask for "Nike Clothes" to move to the next page.',
+                                             position: 'left'
                                              }
                                              ]
                                      });
                introguide.start();
+
+               $("#clothesName").html('<p>Clothes in this scenario: clothes with the Nike logo</p>')
                }
-               
+
                if ({{SkipTime+htmlint}} == 1)
                {
                introguide.setOptions({
                                      steps: [
-                                             
+
                                              {
                                              element: '#movie-row-1',
-                                             intro: 'These are clothes with superheroes.',
+                                             intro: 'These are clothes with superheroes. Click "speak" button to ask for this kind of clothes.',
                                              position: 'bottom'
                                              }
-                                             
+
                                              ]
                                      });
                introguide.start();
+               $("#clothesName").html('<p>Clothes in this scenario: clothes with superheroes</p>')
                }
-               
+
                if ({{SkipTime+htmlint}} == 2)
                {
                introguide.setOptions({
                                      steps: [
-                                             
+
+                                             {
+                                             element: '#headline1',
+                                             intro: 'This is the beginning of the tutorial of the second part. Let\'s begin with the tutorial, too. ',
+                                             position: 'top'
+                                              },
                                              {
                                              element: '#movie-row-2',
-                                             intro: 'We have added another row that shows items you don\'t want. In this case, you want clothes for warm weather (shown in the top row), not for cold weather.',
+                                             intro: 'In this part, We have added another row that shows items you don\'t want. In this case, you are browsing for clothes for warm weather (shown in the top row).',
                                              position: 'top'
                                              }
-                                             
+
                                              ]
                                      });
                introguide.start();
+               $("#clothesName").html('<p>Clothes in this scenario: clothes for warm weather</p>')
+               $('#imagine').html('<p id="imagine"> Imagine that you are browsing for the particular kind of clothes characterized by the four pictures shown in the top row.</p>')
                }
-               
+
                if ({{SkipTime+htmlint}} == 3)
                {
                introguide.setOptions({
                                      steps: [
-                                             
+
                                              {
                                              element: '#movie-row-1',
-                                             intro: 'Please be as specific as possible. In this scenario, what you want is jean shorts.',
+                                             intro: 'Please be as specific as possible. In this scenario, the category of clothes you are searching for is jean shorts.',
                                              position: 'left'
-                                             }
-                                             
+                                           },
+                                           {
+                                           element: '#movie-row-2',
+                                           intro: 'This row helps you be more specific. In this scenario, we want jean shorts, not just shorts, and not just denim clothes.',
+                                           position: 'left'
+                                           }
+
                                              ]
                                      });
                introguide.start();
+               $("#clothesName").html('<p>Clothes in this scenario: jean shorts</p>')
+               $('#imagine').html('<p id="imagine"> Imagine that you are browsing for the particular kind of clothes characterized by the four pictures shown in the top row.</p>')
                }
-               
+
                });
-               
+
         </script>
     {% endblock %}
 

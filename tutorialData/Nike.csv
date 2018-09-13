@@ -1,10 +1,9 @@
-id,title,brand,distription,average Rating,posterPath
-0,Men's Tennis Polo,Nike,"The NikeCourt Dri-FIT Advantage Men's Tennis Polo helps keep you dry and comfortable when you’re engaged in a long rally or serving for match point, all in a bold, new design.",3.87249,static/images/tutorialPic/nike_tennis_polo.jpg
-1,"Men's 7"" Tennis Shorts",Nike,"The NikeCourt Dri-FIT Flex Rafa Ace Men's 7"" Tennis Shorts are designed specifically for the King of Clay. They feature a responsive stretch-woven fabric that gets more breathable as you sweat, then helps lock in warmth as you cool down.",3.99659,static/images/tutorialPic/nike_shorts.jpg
-2,Women's Cropped Hoodie,Nike,The Nike Sportswear Rally Women's Cropped Hoodie features soft fleece and an adjustable hood to help keep you warm and comfortably covered.,3.03013,static/images/tutorialPic/nike_logo_tank.jpg
-3,Women's Logo Tank,Nike,The Nike Sportswear Essential Women's Logo Tank features comfortable fabric with a racerback design for unrestricted movement.,3.91601,static/images/tutorialPic/nike_hoodie.jpg
-,,,,,
-,,,,,
-,,,,,
-,,,,,
-,,,,,
+"id","title","brand","distription","average Rating","posterPath"
+"0","Men's Tennis Polo","Nike","The NikeCourt Dri-FIT Advantage Men's Tennis Polo helps keep you dry and comfortable when you’re engaged in a long rally or serving for match point, all in a bold, new design.","19.99","static/images/tutorialPic/nike_tennis_polo.jpg"
+"1","Men's 7"" Tennis Shorts","Nike","The NikeCourt Dri-FIT Flex Rafa Ace Men's 7"" Tennis Shorts are designed specifically for the King of Clay. They feature a responsive stretch-woven fabric that gets more breathable as you sweat, then helps lock in warmth as you cool down.","18.89","static/images/tutorialPic/nike_shorts.jpg"
+"2","Women's Cropped Hoodie","Nike","The Nike Sportswear Rally Women's Cropped Hoodie features soft fleece and an adjustable hood to help keep you warm and comfortably covered.","17.9","static/images/tutorialPic/nike_hoodie.jpg"
+"3","Women's Logo Tank","Nike","The Nike Sportswear Essential Women's Logo Tank features comfortable fabric with a racerback design for unrestricted movement.","26.8","static/images/tutorialPic/nike_logo_tank.jpg"
+"","","","","",""
+"","","","","",""
+"","","","","",""
+"","","","","",""

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+
+{% block headline %}
+<div class="row">
+  <div class="col-2">
+    <h2 id="headline1">Part: 3 / 3 </h2>
+  </div>
+</div>
+<div class="row" id="headlineRow">
+  <div class="col-2">
+    <h4 id="headline2">Scenario: {{questionNum+1}} / 3 </h4>
+  </div>
+  <div class="col-10">
+    <h4 id="headline3"> Open Questions </h4>
+  </div>
+</div>
+{% endblock %}
+
+    {% block movies %}
+    <div class="row" id="instruction1">
+        <div class="col-10">
+            <h4 id="leftInstruction">  If you could  ask an intelligent assistant for movie recommendations, what  would you say? </h4>
+            <!-- <img id=“wishList” height="40" width="40" src="/static/images/wish-list-icon3.png" /> -->
+        </div>
+    </div>
+    <p></p>
+    <div class="row" id="movie-row-1">
+        <div class="col-8" title="movie-row-1">
+            <div class="posters">
+              <img id=“voicemovie” height="240" width="600" src="/static/images/voicemovie.jpg" />
+              <!-- <p> Prictures of intelligent assistant, computers or TVs </p> -->
+
+            </div>
+        </div>
+    </div>
+      {% endblock %}
+
+
+    {% block help %}
+            <div class="help1" id="help1">
+                <p>Instructions:</p>
+                <p>Think of 3 ways to ask for recommendations from an intelligent assistant, such as Siri or Amazon Echo.</p>
+                <p>To move to the next page, click speak button and ask for movies. Then click "next". It's good to speak naturally.</p>
+            </div>
+    {% endblock %}
+
+
+
+    {% block operation2 %}
+    <div class="row" id="operation">
+            <div class="col-12" align="right">
+              <button id="help-btn" title="Help" class="button">Help</button>
+            </div>
+    </div>
+    {% endblock %}
+
+
+
+
+    {% block myJS %}
+
+<!--        tutorial-->
+         <script>
+             $(function(){
+
+               var questionNum={{questionNum}};
+               if (questionNum != 0)
+               $('#leftInstruction').html("<h4> Give us another example of what you would say. </p4>")
+               if (questionNum == 2){ //last page
+                 $('#leftInstruction').html("<h4> Give us one last example of what you would say. </p4>")
+                 $('#go-next-btn').html("Finish");
+                 $('#go-next-btn').attr("href","/finish");
+               }
+               else{
+                  $('#go-next-btn').html("Go to next scenario");
+                 $('#go-next-btn').attr("href","/OpenQuestions/{{questionNum+1}}");
+
+               }
+
+
+
+
+
+
+               var introguide = introJs();
+
+               introguide.setOptions({
+                  steps: [
+
+                    {
+                          element: '#headlineRow',
+                          intro: 'The last part contains 3 scenarios. In each of them, think of an example that you would ask for recommendations.',
+                          position: 'bottom'
+                    },
+                    // {
+                    //       element: '#next-btn',
+                    //       intro: 'Click this button to see other 2 questions in this part. You can go back to this page by clicking "back" button shown in the following pages.',
+                    //       position: 'left'
+                    // },
+
+
+
+                    ]
+                });
+
+               if (questionNum==0) introguide.start();
+
+
+               });
+        </script>
+    {% endblock %}
+</html>

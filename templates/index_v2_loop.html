@@ -5,15 +5,15 @@
 {% block headline %}
 <div class="row">
   <div class="col-2">
-    <h2 id="headline">Part: {{htmlint+1}} / 6 </h2>
+    <h2 id="headline1">Part: 1 / 3 </h2>
   </div>
 </div>
 <div class="row">
   <div class="col-2">
-    <h4 id="headline2">Scenario: {{SkipTime+1}} / 3 </h4>
+    <h4 id="headline2">Scenario: {{htmlint+1}} / 5 </h4>
   </div>
   <div class="col-10">
-    <h4 id="headline3"> Choose one to answer from three scenarios in this part. </h4>
+    <h4 id="headline3"> Choose one to answer from three questions in this scenario. </h4>
   </div>
 </div>
 {% endblock %}
@@ -21,9 +21,11 @@
     {% block movies %}
     <div class="row" id="instruction1">
         <div class="col-8">
-            <h4>  You want movies like these:</h4>
+            <!-- <h4>  You want movies like these:</h4> -->
+            <img id=“wishList” height="40" width="40" src="/static/images/wish-list-icon3.png" />
         </div>
     </div>
+    <p></p>
     <div class="row" id="movie-row-1">
         <!--                    The 4 movies in the first row-->
         {% for Count in range(0,4) %}
@@ -55,12 +57,13 @@
     {% if (3*htmlint+SkipTime) not in HideIndex %}
     <div class="row">
         <div class="col-12">
-            <h4>Rather than these:</h4>
+            <!-- <h4>Rather than these:</h4> -->
+            <img id=“dislikeList” height="40" width="40" src="/static/images/dislike-list-icon.png" />
         </div>
     </div>
-
+    <p></p>
     <!--                The 4 movies in the second row-->
-    <div class="row">
+    <div class="row" id="movie-row-2">
         {% for Count in range(4,8) %}
         <div class="col-3" title="movie-row-2">
             <div class="posters">
@@ -107,16 +110,20 @@
     {% endblock %}
 
     {% block help %}
-            <div class="help1" id="detail1">
-                <p>Instructions:</p><p>Imagine that you want the movies shown in the first row.</p><p>If you move your cursor over the picture, more information will appear.</p><p>To move to the next page, click speak button and ask for movies. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next". It's good to speak naturally.</p>
+            <div class="help1" id="help1">
+                <p>Instructions:</p>
+                <p id="imagine">Imagine that you are searching for the particular kind of movies shown here.</p>
+                <p>If you move your cursor over the picture, more information will appear.</p>
+                <p>To move to the next page, click speak button and ask for movies. Imagine that you are asking the question to an intelligent assistant such as Siri or Amazon Echo. Then click "next". It's good to speak naturally.</p>
             </div>
     {% endblock %}
 
     {% block operation2 %}
     <div class="row" id="operation">
             <div class="col-12" align="right">
-              <a href="/{{htmlint}}/{{SkipTime-1}}" id="back-btn" class="button"> Back</a>
-              <a href="/{{htmlint}}/{{SkipTime+1}}" id="next-btn" class="button"> Next</a>
+              <font color="green"> ({{SkipTime+1}}/3) </font>
+              <a href="/0/{{htmlint}}/{{SkipTime-1}}" id="back-btn" class="button"> Back </a>
+              <a href="/0/{{htmlint}}/{{SkipTime+1}}" id="next-btn" class="button"> Next </a>
               <button id="help-btn" title="Help" class="button">Help</button>
             </div>
     </div>
@@ -143,7 +150,8 @@
                  var partNum={{partNum}};
 
                if (int1 != partNum-1){
-                 $('#go-next-btn').html("Go next part");
+                 $('#go-next-btn').html("Go to next scenario");
+                 $('#go-next-btn').attr("href","/1/{{htmlint+1}}/0");
                  if (int2 == 0 ) //the first page of a part
                  {
                    $('#back-btn').hide();
@@ -159,21 +167,36 @@
                    $('#next-btn').hide();
                  }
                  else $('#next-btn').show();
+
+                 if (int1 == partNum-2){
+                   $('#go-next-btn').html("Go to next part");
+                   $('#go-next-btn').attr("href","/tutorial/0/2");
+                 }
                }
                else {
-                 $('#headline3').html("Answer every scenario in this part.");
-                 if (int2 != 2)
-                 {
-                   $('#go-next-btn').html("Go next scenario");
-                   $('#go-next-btn').attr("href","/{{htmlint}}/{{SkipTime+1}}");
+                 $('#headline1').html("<h2> Part: 2 / 3 </h2>");
+                 $('#headline2').html("<h4> Scenario: {{htmlint-4+SkipTime}} / 3 </h4>");
 
+                 $('#back-btn').hide();
+                 $('#next-btn').hide();
+
+                 if (int2 == 0) {
+                   $('#headline3').html("Note the difference between the two rows.");
+                   $('#go-next-btn').html("Go to next scenario");
+                   $('#go-next-btn').attr("href","/1/{{htmlint}}/{{SkipTime+1}}");
+                 }
+                 else if (int2 == 1) {
+                   $('#headline3').html("Note the difference and similarity between the two rows.");
+                   $('#go-next-btn').html("Go to next scenario");
+                   $('#go-next-btn').attr("href","/1/{{htmlint}}/{{SkipTime+1}}");
                  }
                  else{
-                   $('#go-next-btn').html("Finish");
-                   $('#go-next-btn').attr("href","/finish");
+                   $('#headline3').html("Note the difference and similarity between the two rows.");
+                   $('#go-next-btn').html("Go to next part");
+                   $('#go-next-btn').attr("href","/OpenQuestions/0");
                  }
-                  $('#back-btn').hide();
-                 $('#next-btn').hide();
+
+
                }
 
 
@@ -182,35 +205,62 @@
                introguide.setOptions({
                   steps: [
                     {
-                          element: '#headline',
-                          intro: 'Now the tutorial has ended. The rest of the tasks will ask you about movies.',
+                          element: '#headline2',
+                          intro: 'Now get start. This part contains 5 scenarios.',
+                          position: 'right'
+                    },
+                    {
+                          element: '#headline3',
+                          intro: 'And in each of the 5 scenarios, you only need to choose one of the 3 questions to answer.',
                           position: 'bottom'
                     },
-                    // {
-                    //     element: '#',
-                    //     intro: 'If you cannot understand this scenario, you can skip ahead. You can skip up to 10 of these (and, you must provide 10 responses to get paid).',
-                    //     position: 'right'
-                    // },
+                    {
+                          element: '#next-btn',
+                          intro: 'Click this button to see other 2 questions in this part. You can go back to this page by clicking "back" button shown in the following pages.',
+                          position: 'left'
+                    },
+
 
 
                     ]
                 });
 
-               if ({{SkipTime}}==0 & {{htmlint}}==0) introguide.start();
+               if ({{showIntro}} == 1 & {{SkipTime}}==0 & {{htmlint}}==0) introguide.start();
 
-               if (int1 == partNum-1 & int2 == 0){
-                 introguide.setOptions({
-                 steps: [
-                   {
-                         element: '#headline3',
-                         intro: 'In this part, you have to answer every scenario in order to go next.',
-                         position: 'bottom'
-                   }
-                   ]
-               });
-               introguide.start();
+              if (int1 == partNum-1)
+              {
+                $('#imagine').html('<p id="imagine"> Imagine that you are searching for a particular kind of movies shown in the top row.</p>')
+                if (int2 == 0){
+                    introguide.setOptions({
+                      steps: [
+                        {
+                              element: '#headline2',
+                              intro: 'Now get start. This part contains 3 scenarios.',
+                              position: 'bottom'
+                        },
+                        {
+                              element: '#headline3',
+                              intro: 'In each scenario, Please note the difference or/and the similarity between the two rows and be as specific as possible',
+                              position: 'bottom'
+                        }
+                        ]
+                       });
+                  if ({{showIntro}} == 1) introguide.start();
+                }
+                // if (int2 == 2){
+                //     introguide.setOptions({
+                //       steps: [
+                //         {
+                //               element: '#movie-row-2',
+                //               intro: 'Please note the difference between the 2 rows.',
+                //               position: 'bottom'
+                //         }
+                //         ]
+                //        });
+                //   if ({{showIntro}} == 1) introguide.start();
+                // }
+              }
 
-               }
 
                });
         </script>

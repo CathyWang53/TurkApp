@@ -8,6 +8,7 @@ from random import choice
 
 pyint = 1
 skipTime = 0
+showIntro = 0 # 1 is showing intro.js; 0 is not showing intro.js
 flag=1
 movieNum = 12
 count=0
@@ -21,7 +22,7 @@ queryFiles=["Leonardo DiCaprio", "Jennifer Lawrence","Hepburn",
             "Mexico", "China","India",
             "Comedy","Romance","Disney",
             "Shark","Robot","Female",
-            "1960&2015", "JapanAnime&Others", "2018Horror&Others",
+            "Old", "JapanAnime&Others", "2018Horror&Others1",
             "2018Horror&Others1","Book",]
 hideRow2Index = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
 showRow3Index = [18]
@@ -30,10 +31,10 @@ showRow3Index = [18]
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
-bp = Blueprint('s1_noJS', __name__, url_prefix='/<int:pyint>/<int:skipTime>')
+bp = Blueprint('s1_noJS', __name__, url_prefix='/<int:showIntro>/<int:pyint>/<int:skipTime>/')
 
 @bp.route('/', methods=('GET', 'POST'))
-def scene1(pyint,skipTime):
+def scene1(pyint,skipTime,showIntro):
     index=(3*pyint+skipTime)%len(queryFiles)
     queryFile = queryFiles[index]
     file1Name = THIS_FOLDER + '/moviedata/%s.csv' % queryFile
@@ -106,6 +107,7 @@ def scene1(pyint,skipTime):
     return render_template('index_v2_loop.html',
                            htmlint=pyint,
                            SkipTime=skipTime,
+                           showIntro=showIntro,
                            Flag=flag,
                            Movies1=pydata,
                            QueryTypeNum=len(queryFiles),

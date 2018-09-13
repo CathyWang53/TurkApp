@@ -35,7 +35,7 @@ $('#example').hide();
 $('#moreExample').hide();
 help.hide();
 $('#go-next-btn').hide();
-$('#detail1').hide();
+$('#help1').hide();
 
 
 
@@ -90,8 +90,10 @@ recognition.onspeechend = function() {
 //    if (noteContent.length && !finishFlag) {
 //        finishFlag=true;
 //        $('#save-note-btn').show();
-////        instructions.text('You were quiet for a while so voice recognition turned itself off. We have got your answer, so you can go next.');
+// //        instructions.text('You were quiet for a while so voice recognition turned itself off. We have got your answer, so you can go next.');
 //   }
+    //setTimeout("afterEndRcd()",5000)
+
 }
 
 recognition.onerror = function(event) {
@@ -99,6 +101,7 @@ recognition.onerror = function(event) {
     instructions.text('No speech was detected. Try again.');
   };
 }
+
 
 
 
@@ -145,33 +148,11 @@ $('#speak').on('click',function(e){
         }
     else //stop recording
         {
-               recognition.stop();
-               if(!noteContent.length) {
-                instructions.text('We could not hear from you. Please try again.');
-               }
-               else{
-                instructions.text('Cong! You can go next.');
-                finishFlag=true;
-                $('#save-note-btn').show();
-                $('#go-next-btn').show();
-               }
-               RcdingFlag=false;
-               $(this).html('Speak Again');
-
-               //stopRecording();
-               stopRecordingMp3();
-
-               // Save note to localStorage.
-               // The key is the dateTime with seconds, the value is the content of the note.
-               saveNote(new Date().toLocaleString(), noteContent);
-
-               // Reset variables and update UI.
-               noteContent = '';
-               renderNotes(getAllNotes());
-               noteTextarea.val('');
-               finishFlag=false;
-
-
+          //afterEndRcd();
+              recognition.stop();
+              $('#speak').hide();
+              instructions.text('Recognizing...Please wait for 2 second');
+               setTimeout(function(){afterEndRcd()},2000);
         }
 });
 
@@ -217,13 +198,13 @@ function change(){ //show up after 5 seconds
         example.show();
         clearInterval(inst);
     }
-}
+};
 
 $('#help-btn').mouseover(function(){
-                         $('#detail1').show();
+                         $('#help1').show();
                          });
 $('#help-btn').mouseout(function(){
-                        $('#detail1').hide();
+                        $('#help1').hide();
                         });
 
 //notesList.on('click', function(e) {
@@ -267,6 +248,35 @@ $('#help-btn').mouseout(function(){
 /*-----------------------------
       Helper Functions
 ------------------------------*/
+
+
+function afterEndRcd(){
+  if(!noteContent.length) {
+   instructions.text('We could not hear from you. Please try again.');
+  }
+  else{
+   instructions.text('You can go next.');
+   finishFlag=true;
+   $('#save-note-btn').show();
+   $('#go-next-btn').show();
+  }
+    RcdingFlag=false;
+    $('#speak').html('Speak Again');
+
+    //stopRecording();
+    stopRecordingMp3();
+
+    // Save note to localStorage.
+    // The key is the dateTime with seconds, the value is the content of the note.
+    saveNote(new Date().toLocaleString(), noteContent);
+
+    // Reset variables and update UI.
+    noteContent = '';
+    renderNotes(getAllNotes());
+    noteTextarea.val('');
+    finishFlag=false;
+    $('#speak').show();
+}
 
 //accept notes array and show them on the webpage
 function renderNotes(notes) {
